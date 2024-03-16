@@ -11,6 +11,8 @@ nav_order: 1
   }
 </style>
 
+
+
 Filters 
 
 [![image](images/Zrzut%20ekranu%202022-11-15%20113642.jpg)](images/Zrzut%20ekranu%202022-11-15%20113642.jpg){:class="img-responsive"}
@@ -423,7 +425,7 @@ $$
 \end{gather*}
 $$
 
-Not looking encouraging but let's rearrange this and notice that $$x((k-1)T) =_{|k=0|}x(-T) = 0$$:
+Not looking encouraging but let's rearrange this and notice that $$x((k-1)T) \overset{k=0}{=} x(-T) = 0$$:
 
 $$
 \begin{gather}
