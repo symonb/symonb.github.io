@@ -2,11 +2,12 @@
 layout: default
 title: Filters - Theory
 parent: Math
+permalink: /docs/math/filters/
 nav_order: 1
 ---
 Filters 
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-15%20113642.jpg){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-15%20113642.jpg){:class="img-responsive"}
 {: .no_toc }
 
 
@@ -39,7 +40,7 @@ $$
 
 $Q$ is the quality factor and influences the selectivity of the filter. Greater value makes sharper characteristics but also introduces more gain in resonance frequency. Because of simplicity, this form is really often used (with $Q= \frac{1}{\sqrt{2}}$ and $\omega_{0}= 1$ it becomes normalized 2nd order Butterworth filter). 
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-15%20124657.jpg){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-15%20124657.jpg){:class="img-responsive"}
 
 However, sometimes when more requirements have to be met we can use some well-defined methods to achieve a more specified filter.
 
@@ -57,7 +58,7 @@ However, sometimes when more requirements have to be met we can use some well-de
 The main differences between these filters can be seen when comparing gain plots of the same order filters:
 
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-15%20141255.jpg){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-15%20141255.jpg){:class="img-responsive"}
 
 ## What is the Q factor?
 
@@ -83,13 +84,13 @@ $$
 \begin{gather}H(s)=H_{LPF}(s) + H_{HPF}(s)\end{gather}
 $$
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-15%20143725.jpg){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-15%20143725.jpg){:class="img-responsive"}
 
 
 Similarly, we can create band-pass filters. This time however we want to let the input signal throw one and the other filter in series (not parallel as earlier). 
 \begin{gather}H(s)=H_{LPF}(s) * H_{HPF}(s)\end{gather}
 
-![image](/docs/math/filters/images/BP.jpg){:class="img-responsive"}
+![image](images/BP.jpg){:class="img-responsive"}
 
 These filters are at least 2nd order and since each zero needs a pole to cancel each other they are always even-order filters. Of course, it is possible to use any of the earlier-mentioned filters to satisfy more rigorous requirements.
 
@@ -108,7 +109,7 @@ $$
 H(s) = \frac{s^{2}+\frac{s}{Q}+\omega_{0}^{2}}{\omega_{0}^{2}}* \frac{\omega_{0}\alpha}{s+\omega_{0}\alpha} *\frac{\frac{\omega_{0}}{\alpha}}{s+\frac{\omega_{0}}{\alpha}} = \frac{s^{2}+\frac{s}{Q}+\omega_{0}^{2}}{s^{2} + s\omega_{0} (\frac{1}{\alpha}+\alpha) + \omega_{0}^{2}} 
 \end{gather}
 $$
-![image](/docs/math/filters/images/notch.jpg){:class="img-responsive"}
+![image](images/notch.jpg){:class="img-responsive"}
 
 Now, that we have known the basic principles behind the notch filters we can think about a more specific design.
 
@@ -177,7 +178,7 @@ $$
 
 So, the step response should be equal to the area below the impulse response curve:
 
-![image](/docs/math/filters/images/step%20and%20impulse.png){:class="img-responsive"}
+![image](images/step%20and%20impulse.png){:class="img-responsive"}
 
 you can try it for any other inputs:
 *   "ramp" function: $x(t)=t\Rightarrow X(s) = \frac{1}{s^2}$
@@ -189,7 +190,7 @@ you can try it for any other inputs:
 When we compare discretized and continuous plots - clearly one of them contains more information than the other. We can decide how much data is lost during discretization by choosing sampling frequency but anyway, some won't be collected. 
 Given a first-order system, the impulse response in the time domain is described as $e^{-t}$, when we discretize this response we have: $e^{-nT}$ where $T$ is the sampling period and $n $ are consecutive samples. What value is in between samples? For well-known systems like this, it is obvious but for an unknown system with sparse sampling, it can be challenging.
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-22%20140731.png){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-22%20140731.png){:class="img-responsive"}
 
 In real-life scenarios usually we deal with continuous systems that we discretize, then perform a digital control loop on it, and at the end send outputs as continuous signals. Since it is impossible to perfectly match analog prototypes with digital versions, there are a few methods of discretization. Each one gives a slightly (sometimes more than slightly) different final transform function (in $z$ domain):
 *    Impulse invariance
@@ -204,7 +205,7 @@ It is worth mentioning that with a sufficiently high sampling frequency, all the
 ## Impulse invariance
 This method is based on impulse response. The main idea is that the impulse response of the discretized system has to match the sampled impulse response of the continuous system. 
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-22%20214254.png){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-22%20214254.png){:class="img-responsive"}
 
 Sketch, how it is done:
 Transform the analog transfer function into the sum of the first-order terms (it works for strictly proper transfer function and without repeated poles*):
@@ -233,7 +234,7 @@ However, step response in such a designed system does not match with the respons
 Usually, when we control motors or another analog plant with a discrete controller we don't use impulses. For each iteration, new outputs are computed and sent to DAC (_Digital to Analog Converter_) Then they are held as constants for a whole period until the next values are set and the process repeats.
 
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-12-08%20104912.png){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-12-08%20104912.png){:class="img-responsive"}
 
 To take this into account we need to add the transfer function of ZOH. In essence, we can:
 $$
@@ -284,7 +285,7 @@ $$
 
 The above function may look complicated but it is really simple. Step functions create a rectangular signal which is multiplied by  $x(kT)$ which is the sample value for $t=kT$. Next, we add these scaled-up rectangles and that's it:
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-12-09%20010443.png)
+![image](images/Zrzut%20ekranu%202022-12-09%20010443.png)
 *The left green rectangular signal is made out of 2 step-function. Next, those rectangular functions are multiplicated by some constants and combined (right plot)*
 {:class="img-responsive"}
 
@@ -329,7 +330,7 @@ $$
 After all, that effort, is it any good?
 
 
-![image](/docs/math/filters/images/FOH%20predictive.png){:class="img-responsive"}
+![image](images/FOH%20predictive.png){:class="img-responsive"}
 
 The results are a bit sketchy. That's because this method called "predictive first-order hold" extrapolates, or tries to predict the next sample value. It works for smooth monotonic outputs but fails on sharp curves. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ sample and interpolate between known values. You can make math yourself  (is similar to this above), but in the end, we have:
 $$
@@ -340,7 +341,7 @@ $$
 
 which produces this:
 
-![image](/docs/math/filters/images/FOH%20casual.png){:class="img-responsive"}
+![image](images/FOH%20casual.png){:class="img-responsive"}
 
 Better, but this is still not the same result as Matlab gives. Values are correct but shifted by 1 period. That is because we wanted to interpolate between points as a linear function. We need to wait 1 period to get the next value and then interpolate. But this is a problem when we want to produce a continuous signal from the discrete signal. Our goal is to recreate values of the sampled signal and between values is not so important. So let's add one z to the nominator (make this transfer function non-casual in the s domain). But can we use the non-casual functions? In the discrete world - yes, not anyone but when the nominator and denominator are of the same order it is fine. When we get a new value of input our output can give some value because we only focus on discrete values. when we would like to create a linear continuous function from these inputs we have to wait for the next input to interpolate between neighbouring points.
 
@@ -351,7 +352,7 @@ $$
 This method is also called the ramp-invariant or triangle-hold method (impulse response gives some clue why). As you can suspect this method gives identical discrete values as a sampled response of the continuous system when we apply a ramp input. Let's compare ramp responses of all FOH methods we've described:
 
 
-![image](/docs/math/filters/images/ramp%20responses.png){:class="img-responsive"}
+![image](images/ramp%20responses.png){:class="img-responsive"}
 
 As you can see Matlab version of FOH discretization gives the same values as the original continuous response for sample points. Yellow points are the same as the previous but shifted one period (as we expected for one more $z$ in the denominator).  Quite interesting is the predictive FOH response which at first gives a bit of error but then it catches up and is pretty similar to a "Matlab version". 
 
@@ -391,7 +392,7 @@ s=\frac{2}{T}\frac{z-1}{z+1}
 $$
 This way discretized system preserve their characteristics for some frequency (and their surroundings) but for more distant frequencies characteristics are a bit different. You can see this in the Bode plots:
 
-![image](/docs/math/filters/images/bode%20tustin.png){:class="img-responsive"}
+![image](images/bode%20tustin.png){:class="img-responsive"}
 
 When we use the Tustin transform for systems with one specified important frequency: notch filters - central frequency or LPF - cutoff frequency it is great. But if we want to transform a system with a few characteristic frequencies (for example bandpass filter with a high cutoff close to Nyquist frequency and low-cut frequency close to 0) it is not a great idea. There would be much distortion since we can pre-warp only for one frequency.
 
@@ -407,7 +408,7 @@ where $\omega_0$ is the desired frequency (cut-off or central frequency).
 
 
 
-![image](/docs/math/filters/images/notch%20with%20tustin.png){:class="img-responsive"}
+![image](images/notch%20with%20tustin.png){:class="img-responsive"}
 
 The advantage of warping is an absence of aliasing since each point of a left plane has a different point in a unit circle.
 
@@ -440,7 +441,7 @@ This implementation is called Direct Form 1 and works fine but the same result c
 Imagine a sinusoidal signal  $sin(\omega t)$ with period time $T$ ($f_{0}=\frac{1}{T}$ and $\omega = 2\pi f_{0}$). When we sample this signal (e.g. reading gyro measurements) with frequency $F_{s} = 4f_{0}$ we will get a series of points. Assume that we start sampling with $x=1$ then our measurements are $\mathbf{x}= [1,0,-1,0,1...]$. If we consider a faster signal with $f_{1} = 2f_{0}$ with sampling also 2 times faster than previous signal $F_{2s} = \frac{2}{T}$. We will get the same measurements $\mathbf{x}= [1,0,-1,0,1...]$.
 
 
-![image](/docs/math/filters/images/Zrzut%20ekranu%202022-11-15%20185855.jpg){:class="img-responsive"}
+![image](images/Zrzut%20ekranu%202022-11-15%20185855.jpg){:class="img-responsive"}
 
 Therefore there is no difference in what the real frequency was, as long as the ratio of sampling and an input signal is a constant value. That is an important observation and since the difference equation in general form looks like this: 
 $$

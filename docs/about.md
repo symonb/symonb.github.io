@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /about/
+permalink: /docs/bout/
 nav_order: 7
 ---
 
