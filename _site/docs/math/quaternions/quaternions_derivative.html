@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="/assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+.site-nav > ul.nav-list:first-child > li > a,
+.site-nav > ul.nav-list:first-child > li > ul > li > a,
+.site-nav > ul.nav-list:first-child > li > ul > li > ul > li:not(:nth-child(2)) > a {
+  background-image: none;
+}
+
+.site-nav > ul.nav-list:not(:first-child) a,
+.site-nav li.external a {
+  background-image: none;
+}
+
+.site-nav > ul.nav-list:first-child > li:nth-child(3) > ul > li:nth-child(3) > ul > li:nth-child(2) > a {
+  font-weight: 600;
+  text-decoration: none;
+}.site-nav > ul.nav-list:first-child > li:nth-child(3) > button svg,
+.site-nav > ul.nav-list:first-child > li:nth-child(3) > ul > li:nth-child(3) > button svg {
+  transform: rotate(-90deg);
+}.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list,
+.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list > li.nav-list-item:nth-child(3) > ul.nav-list {
+  display: block;
+}
+  </style>
+
+  
+
+  
+    <script src="/assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Quaternion derivative | SB Blog</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Quaternion derivative" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<link rel="canonical" href="http://localhost:4000/docs/math/quaternions/quaternions_derivative.html" />
+<meta property="og:url" content="http://localhost:4000/docs/math/quaternions/quaternions_derivative.html" />
+<meta property="og:site_name" content="SB Blog" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Quaternion derivative" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","headline":"Quaternion derivative","url":"http://localhost:4000/docs/math/quaternions/quaternions_derivative.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+
+    <script>
+MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewbox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewbox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewbox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewbox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewbox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewbox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewbox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"></path>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"></path>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewbox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewbox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"></path>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"></path>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="/" class="site-title lh-tight">
+  SB Blog
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Toggle menu" aria-pressed="false">
+      <svg viewbox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list">
+<li class="nav-list-item"><a href="/docs/programming/programming.html" class="nav-list-link">Programming</a></li>
+<li class="nav-list-item">
+<button class="nav-list-expander btn-reset" aria-label="toggle items in Drone category" aria-pressed="false">
+      <svg viewbox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+    </button><a href="/docs/drone/drone.html" class="nav-list-link">Drone</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/drone/ESC/ESC_protocols.html" class="nav-list-link">ESC protocols overview</a></li></ul>
+</li>
+<li class="nav-list-item">
+<button class="nav-list-expander btn-reset" aria-label="toggle items in Math category" aria-pressed="false">
+      <svg viewbox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+    </button><a href="/docs/math/math.html" class="nav-list-link">Math</a><ul class="nav-list">
+<li class="nav-list-item"><a href="/docs/math/filters/filters_theory.html" class="nav-list-link">Filters - Theory</a></li>
+<li class="nav-list-item"><a href="/docs/math/rotation%20in%203D/transf_matrix.html" class="nav-list-link">Transformation matrix</a></li>
+<li class="nav-list-item">
+<button class="nav-list-expander btn-reset" aria-label="toggle items in Quaternions category" aria-pressed="false">
+            <svg viewbox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+          </button><a href="/math/quaternions/" class="nav-list-link">Quaternions</a><ul class="nav-list">
+<li class="nav-list-item">
+                <a href="/docs/math/quaternions/quaternions_intro.html" class="nav-list-link">Quaternions Intro</a>
+              </li>
+<li class="nav-list-item">
+                <a href="/docs/math/quaternions/quaternions_derivative.html" class="nav-list-link">Quaternion derivative</a>
+              </li>
+<li class="nav-list-item">
+                <a href="/docs/math/quaternions/quaternions_as%20_rotation.html" class="nav-list-link">Quaternions as rotation</a>
+              </li>
+</ul>
+</li>
+<li class="nav-list-item"><a href="/docs/math/rotation%20in%203D/lerp_nlerp_slerp.html" class="nav-list-link">LERP, NLERP, SLERP</a></li>
+<li class="nav-list-item"><a href="/docs/math/rotation%20in%203D/Euler_Tait_Bryan.html" class="nav-list-link">Euler/Tait-Bryan/yaw-pitch-roll</a></li>
+</ul>
+</li>
+<li class="nav-list-item">
+<button class="nav-list-expander btn-reset" aria-label="toggle items in STM32 category" aria-pressed="false">
+      <svg viewbox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+    </button><a href="/docs/STM32/STM32.html" class="nav-list-link">STM32</a><ul class="nav-list">
+<li class="nav-list-item"><a href="/docs/STM32/STM32_develop_1_2.html" class="nav-list-link">STM32 development 1/2</a></li>
+<li class="nav-list-item"><a href="/docs/STM32/STM32_develop_2_2.html" class="nav-list-link">STM32 development 2/2</a></li>
+<li class="nav-list-item"><a href="/docs/STM32/USB.html" class="nav-list-link">USB with STM32</a></li>
+</ul>
+</li>
+<li class="nav-list-item"><a href="/about/" class="nav-list-link">About</a></li>
+</ul>
+
+  
+</nav>
+
+
+  
+  
+    <footer class="site-footer">
+      This site uses <a href="https://github.com/just-the-docs/just-the-docs" target="_blank" rel="noopener noreferrer">Just the Docs</a>, a documentation theme for Jekyll.
+    </footer>
+  
+</div>
+
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search SB Blog" aria-label="Search SB Blog" autocomplete="off">
+    <label for="search-input" class="search-label"><svg viewbox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="/docs/math/math.html">Math</a></li>
+    <li class="breadcrumb-nav-list-item"><a href="/math/quaternions/">Quaternions</a></li>
+    <li class="breadcrumb-nav-list-item"><span>Quaternion derivative</span></li>
+  </ol>
+</nav>
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <p><img src="/docs/math/quaternions/images/quaternion%20derivative.png" alt="image" class="img-responsive"></p>
+
+<p>When I was searching for uses of quaternions in orientation algorithms, there was always one equation that was shown with no explanation:</p>
+
+\[\begin{gather}\dot{\mathbf{q}}(t)=\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t) \end{gather}\]
+
+<p>but sometimes it was:</p>
+
+\[\begin{gather}\dot{\mathbf{q}}(t)=-\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t) \end{gather}\]
+
+<p>or</p>
+
+\[\begin{gather}\dot{\mathbf{q}}(t)=-\frac{1}{2}\mathbf{q}(t) \boldsymbol{\omega}\end{gather}\]
+
+<p>Moreover, when I was looking for any derivation of these formulas I found out that all resources were several pages - not very encouraging for me or derivations were not complete in their own calculations, which was even more frustrating when you were thinking that finally, you would understand this.</p>
+
+<p>So, I decided to do it myself in 2 ways: first more based on quaternion interpretation and the second old-fashion derivative from the definition. Also, I will discuss frames of reference in which all of the elements are presented. I will provide some transformations of an equation in which everything will be well described and you will be able to better understand equations used in many other resources. I highly recommend reading an Introduction to quaternions and Quaternions as rotations because although derivatives are based on knowledge from basic calculus some of the properties of quaternions and their interpretation are needed to fully understand these calculations.</p>
+
+<p>Let’s start with the traditional derivate from the definition of derivative:</p>
+
+\[\begin{gather}
+\dot{\mathbf{q}}(t)=\lim_{\Delta t\to 0} \frac{\mathbf{q}(t+\Delta t)-\mathbf{q}(t)}{\Delta t}\\ \nonumber\\ \mathbf{q}(t)=\cos{\left(\frac{\omega}{2}t\right)}+\mathbf{v}\sin{\left(\frac{\omega}{2}t\right)}=\cos{\left(\frac{\theta(t)}{2}\right)}+\mathbf{v}\sin{\left(\frac{\theta(t)}{2}\right)}\\ \nonumber\\ \mathbf{q}(t+\Delta t)=\mathbf{q}(\Delta t)\mathbf{q}(t)=\left[\cos{\left( \frac{\omega}{2}\Delta t\right)}+\mathbf{v}\sin{\left(\frac{\omega}{2}\Delta t\right)}\right]\left[\cos{\left(\frac{\omega}{2}t\right)}+\mathbf{v}\sin{\left(\frac{\omega}{2}t\right)}\right]\\ \nonumber\\ \dot{\mathbf{q}}(t)=\lim_{\Delta t\to 0} \frac{(\mathbf{q}(\Delta t)-1)\mathbf{q}(t)}{\Delta t}
+\end{gather}\]
+
+<p>by using the approximations: $\begin{gather}\lim_{\Delta x\to 0}\cos{(\Delta x)}=1,\ \lim_{\Delta x\to 0}\sin{(\Delta x)}=\Delta x\end{gather} $:</p>
+
+\[\begin{gather} \dot{\mathbf{q}}(t) =\lim_{\Delta t\to 0} \frac{\left(1+ \mathbf{v}\frac{\omega}{2}\Delta t-1\right)\mathbf{q}(t)}{\Delta t}=\lim_{\Delta t\to 0} \frac{\mathbf{v}\frac{\omega}{2}\Delta t}{\Delta t}\mathbf{q}(t) =\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t) \end{gather}\]
+
+<p>Now, let’s see a derivate which is for me really nice because it is based on the interpretation of quaternions as rotations.
+The quaternion describing the rotation from the initial position to the current position can be written as:</p>
+
+\[\begin{gather} \mathbf{q}(t)=\mathbf{q}\_{\omega}^t\mathbf{q}\_0
+\end{gather}\]
+
+<p>Next, assuming constancy of angular velocity $\boldsymbol{\omega}=const.$ we can use an exponential form of quaternion and write:</p>
+
+\[\begin{gather} \mathbf{q}_{\omega}=\cos{\frac{\omega}{2}} + \mathbf{v}\sin{\frac{\omega}{2}}\\ \nonumber\\ \mathbf{q}_{\omega}^t=e^{\mathbf{v}\frac{\omega}{2}t}\\ \nonumber\\ \dot{\mathbf{q}}(t)=\frac{d}{dt}(\mathbf{q}_{\omega}^t\mathbf{q}\_0)=\frac{d}{dt}\left(\mathbf{q}_{\omega}^t\right)\mathbf{q}_0+\mathbf{q}_{\omega}^t\frac{d}{dt}\mathbf{q}\_0=e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}\mathbf{q}\_0\end{gather}\]
+
+<p>from direct calculations it can be shown that $e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}=\mathbf{v}\frac{\omega}{2}e^{\mathbf{v}\frac{\omega}{2}t} $ $^*$ ; additionally $\mathbf{v}\omega$ = $\boldsymbol{\omega}$ so:</p>
+
+<p>\(\begin{gather}
+\dot{\mathbf{q}}(t)=\frac{\boldsymbol{\omega}}{2}e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{q}_{0}=\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t)
+\end{gather}\)
+$^*$ in general multiplication is not commutative. See end of this post for explenation.</p>
+
+<p>The above formulas for the derivative of the quaternion of rotation use the quaternion q which is the quaternion transforming from the drone-related system to the global frame. However, the quaternion describing the transformation from the global system to the local system is more commonly used. We know that:
+\(\begin{gather}  
+ {}^{b}_{g}\mathbf{q}={}^{g}_{b}=\mathbf{q}^{-1}={}^{g}_{b}\mathbf{q}^{*}
+\end{gather}\)</p>
+
+<p>analogically derivative:
+\(\begin{gather}   
+ {}^{b}_{g}\dot{\mathbf{q}}={}^{g}_{b}\dot{\mathbf{q}}^{*}
+ \end{gather}\)</p>
+
+<p>using a formula for conjugation of quaternions multiplication:
+\(\begin{gather}
+{}^{b}_{g}\dot{\mathbf{q}}=\left( \frac{1}{2}\boldsymbol{\omega}{}^{g}_{b}\mathbf{q}(t)\right)^{*}=\frac{1}{2} {}^{g}_{b}\mathbf{q}(t)^{*}\boldsymbol{\omega}^{*}=-\frac{1}{2}{}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}
+\end{gather}\)</p>
+
+<p>Note, that the $\boldsymbol{\omega}$ which was used in the above formulas is a vector in the global system. We were considering quaternions which were describing global rotation from default orientation to end one. The measurements of the gyroscope are taken in the local frame. Taking this into account, it can be written:
+\(\begin{gather}
+\begin{split}   {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\left( {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{g}_{b}\mathbf{q}(t)^{*}\right)}=\\    =-\frac{1}{2} {}^{b}_{g}\mathbf{q}(t) {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)  
+\end{split}
+\end{gather}\)</p>
+
+<p>So, this is the final equation:
+\(\begin{gather}  
+ {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t) \label{eq:derivative of quaternion}
+\end{gather}\)</p>
+
+<p>It takes gyroscope measurements in the local frame (drone frame) and quaternion that is describing transformation from global frame to local frame.</p>
+
+<p>If you want use the same quaternion but measurements are in the global frame you need to use:
+\(\begin{gather}  
+ {}^{b}_{g}\dot{\mathbf{q}}=\frac{1}{2} {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}
+ \end{gather}\)
+If you have the measurements in global frame and quaternion describing the rotation from global to local frame you can use:
+\(\begin{gather}  
+ {}^{g}_{b}\dot{\mathbf{q}}=\frac{1}{2}\boldsymbol{\omega}^{(g)} {}^{g}_{b}\mathbf{q}(t) 
+\end{gather}\)</p>
+
+<p>So, as you can see it is important to know what reference frame you’re using and which quaternion is used but now you should be able to transform these equations if necessary, at least it is my hope.</p>
+<h2 id="why-emathbfvfracomega2tmathbfvfracomega2mathbfvfracomega2emathbfvfracomega2t--is-correct">
+  
+  
+    <a href="#why-emathbfvfracomega2tmathbfvfracomega2mathbfvfracomega2emathbfvfracomega2t--is-correct" class="anchor-heading" aria-labelledby="why-emathbfvfracomega2tmathbfvfracomega2mathbfvfracomega2emathbfvfracomega2t--is-correct"><svg viewbox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Why $e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}=\mathbf{v}\frac{\omega}{2}e^{\mathbf{v}\frac{\omega}{2}t} $ is correct?
+  
+  
+</h2>
+    
+
+<p>So, if we decompose the formulas to the same forms:
+\(\begin{gather}
+L:\ e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}= (\cos{\frac{\omega}{2} t}+\mathbf{v}sin{\frac{\omega}{2} t})(0+\mathbf{v}\frac{\omega}{2})\\ \nonumber \\R:\ \mathbf{v}\frac{\omega}{2}e^{\mathbf{v}\frac{\omega}{2}t}= (0+\mathbf{v}\frac{\omega}{2})(\cos{\frac{\omega}{2} t}+\mathbf{v}sin{\frac{\omega}{2} t})
+\end{gather}\)
+it is important that only vector $\mathbf{v}$ has imaginary symbols and rest of the components can be written as some scalars:
+\(\begin{gather}
+L:\  (\alpha_1+\mathbf{v}\beta_1)(\alpha_2+\mathbf{v}\beta_2)\\ \nonumber \\R:\  (\alpha_2+\mathbf{v}\beta_2)(\alpha_1+\mathbf{v}\beta_1)
+\end{gather}\)
+now we can perform multiplication:
+\(\begin{gather}
+L:\  \alpha_1\alpha_2+\alpha_1\mathbf{v}\beta_2 +\mathbf{v}\beta_1 \alpha_2+\mathbf{v}\beta_1\mathbf{v}\beta_2\\ \nonumber \\R:\  \alpha_2\alpha_1+\alpha_2\mathbf{v}\beta_1+\mathbf{v}\beta_2\alpha_1+\mathbf{v}\beta_2\mathbf{v}\beta_1
+\end{gather}\)
+rearranging components we can show that $L=R$:</p>
+
+\[\begin{gather}
+L:\  \alpha_1\alpha_2+\mathbf{v}(\alpha_1\beta_2 +\beta_1 \alpha_2)+\mathbf{v}\mathbf{v}\beta_1\beta_2\\ \nonumber \\R:\  \alpha_2\alpha_1+\mathbf{v}(\alpha_2\beta_1+\beta_2\alpha_1)+\mathbf{v}\mathbf{v}\beta_2\beta_1
+\end{gather}\]
+
+          
+
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+<a href="#top" id="back-to-top">Back to top</a>
+
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+
+
