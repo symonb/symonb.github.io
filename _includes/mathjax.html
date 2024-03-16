@@ -1,7 +1,11 @@
 <script>
 MathJax = {
+  
     tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
+      tags: 'ams',
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
     },
     svg: {
       fontCache: 'global'

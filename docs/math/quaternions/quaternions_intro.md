@@ -3,6 +3,7 @@ layout: default
 title: Quaternions Intro
 parent: Quaternions
 grand_parent: Math
+permalink: math/quaternions/quaternions_intro
 nav_order: 1
 ---
 
@@ -12,7 +13,7 @@ The quaternion notation is the least intuitive solution, but it has several adva
 
 # What are quaternions?
 
-Quaternions are just extensions of complex numbers.They have Real part - $Re(\mathbf{q})$ and Imaginary part - $Im(\mathbf{q})$ but instead of 1, there are 3 imaginary symbols ($i,\ j,\ k$). If the real part is zero then such a quaternion calls a pure quaternion. If the imaginary part is zero it is just a real number.
+Quaternions are just extensions of complex numbers. They have Real part - $Re(\mathbf{q})$ and Imaginary part - $Im(\mathbf{q})$ but instead of 1, there are 3 imaginary symbols ($i,\ j,\ k$). If the real part is zero then such a quaternion calls a pure quaternion. If the imaginary part is zero it is just a real number.
 \begin{equation} \mathbf{q}=a+bi+cj+dk\end{equation}
 $a,\ b,\ c,\ d$ - real numbers
 

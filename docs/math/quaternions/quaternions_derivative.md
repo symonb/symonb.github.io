@@ -6,7 +6,7 @@ grand_parent: Math
 nav_order: 2
 ---
 
-![image](/docs/math/quaternions/images/quaternion%20derivative.png){:class="img-responsive"}
+![image](images/quaternion%20derivative.png){:class="img-responsive"}
 
 When I was searching for uses of quaternions in orientation algorithms, there was always one equation that was shown with no explanation:
 
@@ -26,9 +26,9 @@ $$
 \begin{gather}\dot{\mathbf{q}}(t)=-\frac{1}{2}\mathbf{q}(t) \boldsymbol{\omega}\end{gather}
 $$
 
-Moreover, when I was looking for any derivation of these formulas I found out that all resources were several pages - not very encouraging for me or derivations were not complete in their own calculations, which was even more frustrating when you were thinking that finally, you would understand this.
+Moreover, when I was looking for any derivation of these formulas I found out that all resources were several pages - not very encouraging for me or derivations were not complete in their calculations, which was even more frustrating when you were thinking that finally, you would understand this.
 
-So, I decided to do it myself in 2 ways: first more based on quaternion interpretation and the second old-fashion derivative from the definition. Also, I will discuss frames of reference in which all of the elements are presented. I will provide some transformations of an equation in which everything will be well described and you will be able to better understand equations used in many other resources. I highly recommend reading an Introduction to quaternions and Quaternions as rotations because although derivatives are based on knowledge from basic calculus some of the properties of quaternions and their interpretation are needed to fully understand these calculations.
+So, I decided to do it myself in 2 ways: based on quaternion interpretation and old-fashioned derivative from the definition. Also, I will discuss frames of reference in which all of the elements are presented. I will provide some transformations of an equation in which everything will be well described and you will be able to better understand equations used in many other resources. I highly recommend reading an Introduction to quaternions and Quaternions as rotations because although derivatives are based on knowledge from basic calculus some of the properties of quaternions and their interpretation are needed to fully understand these calculations.
 
 Let's start with the traditional derivate from the definition of derivative:
 
@@ -44,7 +44,7 @@ $$
 \begin{gather} \dot{\mathbf{q}}(t) =\lim_{\Delta t\to 0} \frac{\left(1+ \mathbf{v}\frac{\omega}{2}\Delta t-1\right)\mathbf{q}(t)}{\Delta t}=\lim_{\Delta t\to 0} \frac{\mathbf{v}\frac{\omega}{2}\Delta t}{\Delta t}\mathbf{q}(t) =\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t) \end{gather}
 $$
 
-Now, let's see a derivate which is for me really nice because it is based on the interpretation of quaternions as rotations.
+Now, let's see a more pleasant way to obtain a derivate - based on the interpretation of quaternions as rotations.
 The quaternion describing the rotation from the initial position to the current position can be written as:
 
 $$
@@ -52,7 +52,7 @@ $$
 \end{gather}
 $$
 
-Next, assuming constancy of angular velocity $\boldsymbol{\omega}=const.$ we can use an exponential form of quaternion and write:
+Next, assuming constancy of angular velocity $\boldsymbol{\omega}=const.$ We can use an exponential form of quaternion and write:
 
 $$
 \begin{gather} \mathbf{q}_{\omega}=\cos{\frac{\omega}{2}} + \mathbf{v}\sin{\frac{\omega}{2}}\\ \nonumber\\ \mathbf{q}_{\omega}^t=e^{\mathbf{v}\frac{\omega}{2}t}\\ \nonumber\\ \dot{\mathbf{q}}(t)=\frac{d}{dt}(\mathbf{q}_{\omega}^t\mathbf{q}\_0)=\frac{d}{dt}\left(\mathbf{q}_{\omega}^t\right)\mathbf{q}_0+\mathbf{q}_{\omega}^t\frac{d}{dt}\mathbf{q}\_0=e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}\mathbf{q}\_0\end{gather}
@@ -65,7 +65,7 @@ $$
 \dot{\mathbf{q}}(t)=\frac{\boldsymbol{\omega}}{2}e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{q}_{0}=\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t)
 \end{gather}
 $$
-$^*$ in general multiplication is not commutative. See end of this post for explenation. 
+$^*$ in general multiplication is not commutative. See the end of this post for an explanation. 
 
 The above formulas for the derivative of the quaternion of rotation use the quaternion q which is the quaternion transforming from the drone-related system to the global frame. However, the quaternion describing the transformation from the global system to the local system is more commonly used. We know that:
 $$
@@ -89,7 +89,7 @@ $$
 \end{gather}
  $$
 
-Note, that the $\boldsymbol{\omega}$ which was used in the above formulas is a vector in the global system. We were considering quaternions which were describing global rotation from default orientation to end one. The measurements of the gyroscope are taken in the local frame. Taking this into account, it can be written:
+Note, that the $\boldsymbol{\omega}$ which was used in the above formulas is a vector in the global system. We were considering quaternions which describe global rotation from default orientation to end one. The measurements of the gyroscope are taken in the local frame. Taking this into account, it can be written:
 $$
 \begin{gather}
 \begin{split}   {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\left( {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{g}_{b}\mathbf{q}(t)^{*}\right)}=\\    =-\frac{1}{2} {}^{b}_{g}\mathbf{q}(t) {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)  
@@ -104,9 +104,7 @@ $$
 \end{gather}
 $$
 
-It takes gyroscope measurements in the local frame (drone frame) and quaternion that is describing transformation from global frame to local frame. 
-
-If you want use the same quaternion but measurements are in the global frame you need to use:
+It takes gyroscope measurements in the local frame (drone frame) and quaternion that describes the transformation from the global frame to the local frame. If you want to use the same quaternion but measurements are in the global frame you need to use:
 $$
 \begin{gather}  
  {}^{b}_{g}\dot{\mathbf{q}}=\frac{1}{2} {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}
