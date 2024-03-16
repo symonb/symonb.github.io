@@ -79,6 +79,12 @@ search:
 # To make MathJax available on all web pages:
 math: mathjax
 
+# Add Callouts:
+callouts:
+  warning:
+    title: Warning
+    color: red
+
 
 kramdown:
   syntax_highlighter_opts:

@@ -17,13 +17,15 @@ Filters
 {: .no_toc }
 
 
-
-## Table of contents
-{: .no_toc .text-delta }
-
-
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
 1. TOC
 {:toc}
+</details>
+
 # Intro
 In this post, I want to present the theory needed for digital filter design. Firstly, a quick description of mainly used filters in the continuous domain - I want to give you some intuition in interpreting the transform functions. Next, I will present practical discretization from the '$s$' domain into the '$z$' (discrete time). Finally, a difference equation will be provided which can be directly programmed on any microprocessor. In a future post, I will show the possible implementation of described filters.
 
