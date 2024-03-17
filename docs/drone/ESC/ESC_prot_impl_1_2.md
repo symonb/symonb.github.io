@@ -7,11 +7,7 @@ parent: ESC
 grand_parent: Drone
 ---
 
-<style type="text/css">
-  p {
-    text-align: justify;
-  }
-</style>
+
 
 <details open markdown="block">
   <summary>

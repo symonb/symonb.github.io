@@ -4,7 +4,7 @@ title: Programming
 nav_order: 1
 ---
 
-Probmlem with numerating !!!
+
 
 ```cmake
 cmake_minimum_required(VERSION 3.16)

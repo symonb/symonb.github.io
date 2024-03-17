@@ -5,20 +5,14 @@ parent: Math
 nav_order: 1
 ---
 
-<style type="text/css">
-  p {
-    text-align: justify;
-  }
-</style>
 
 
-
-Filters 
 
 [![image](images/Zrzut%20ekranu%202022-11-15%20113642.jpg)](images/Zrzut%20ekranu%202022-11-15%20113642.jpg){:class="img-responsive"}
+
+
+# Filters 
 {: .no_toc }
-
-
 <details open markdown="block">
   <summary>
     Table of contents

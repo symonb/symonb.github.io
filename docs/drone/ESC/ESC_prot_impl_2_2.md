@@ -8,11 +8,9 @@ grand_parent: Drone
 
 ---
 
-<style type="text/css">
-  p {
-    text-align: justify;
-  }
-</style>
+[![image](images/noide.png)](images/noide.png)
+# STM32 development workflow part 2
+
 <details open markdown="block">
   <summary>
     Table of contents

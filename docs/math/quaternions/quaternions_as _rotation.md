@@ -7,11 +7,7 @@ permalink: /docs/math/quaternions/quaternions_as_rotation
 nav_order: 3
 ---
 
-<style type="text/css">
-  p {
-    text-align: justify;
-  }
-</style>
+
 <details open markdown="block">
   <summary>
     Table of contents

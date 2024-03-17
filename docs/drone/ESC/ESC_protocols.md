@@ -6,11 +6,9 @@ parent: ESC
 grand_parent: Drone
 ---
 
-<style type="text/css">
-  p {
-    text-align: justify;
-  }
-</style>
+# ESC protocols
+{: .no_toc}
+
 <details open markdown="block">
   <summary>
     Table of contents

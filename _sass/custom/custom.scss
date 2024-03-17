@@ -1,0 +1,22 @@
+p {
+    text-align: justify;
+  }
+
+img{
+    max-width: 100%;
+    display: block;
+    margin: 0 auto; /* Centers the images horizontally */
+}
+
+custom_caption{
+    display: block;
+    text-align: center;
+    font-style: italic;
+}
+
+// .equation-container {
+//     overflow: auto; /* Enable scrolling */
+//     max-height: 300px; /* Set maximum height for the container */
+//     border: 1px solid #ccc; /* Optional: Add border for visibility */
+//     padding: 10px; /* Optional: Add padding for spacing */
+// }

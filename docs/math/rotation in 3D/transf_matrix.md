@@ -5,11 +5,7 @@ parent: Math
 nav_order: 3
 ---
 
-<style type="text/css">
-  p {
-    text-align: justify;
-  }
-</style>
+
 <details open markdown="block">
   <summary>
     Table of contents
@@ -44,7 +40,7 @@ It is important to see the difference between the transformation of a vector bet
 
 Assuming that a certain reference system ($\pi_1$) is associated with the object, and on each of its axes there are versors (see picture below); additionally, there is a fixed reference system associated with the static environment ($\pi_0$). The transformation matrix from the object-related system ($\pi_1$) to the global system ($\pi_0$) will be equal to the notation of 3 versors, associated with the moving system, in the global frame (\ref{eq:transformation matrix}).
 
-[![image](images/macierz%20rotacji.png/)](images/macierz%20rotacji.png)
+[![image](images/macierz%20rotacji.png)](images/macierz%20rotacji.png)
 
 $$
 \begin{gather}\label{eq:transformation matrix}  \mathbf{R}_{1}^0=\left[\mathbf{i}^{(0)},\mathbf{j}^{(0)},\mathbf{k}^{(0)}    \right]=    \left[    \begin{array}{ccc}       i_x &j_x & k_x \\      i_y & j_y & k_y \\       i_z & j_z &k_z    \end{array}    \right]    

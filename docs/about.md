@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About me
 nav_order: 7
 ---
 
