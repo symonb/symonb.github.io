@@ -40,10 +40,9 @@ $$
 Below you can see how Euler angles work in a real situation:
 
 [![image](images/Euler_angles_wew.png)](images/Euler_angles_wew.png)
-*Euler angles in body frames*
+<custom_caption>Euler angles in body frames</custom_caption>
 
-[![image](images/Euler_angles_zew.png)](images/Euler_angles_zew.png)
-*Euler angles in a world frame*
+[![image](images/Euler_angles_zew.png)](images/Euler_angles_zew.png)<custom_caption>Euler angles in a world frame</custom_caption>
 
 The first picture shows the yaw-pitch-roll convention which is commonly used in aviation and aerospace because of the intuitive nature of its movements: at first, the aircraft positions itself on the runway (yaw angle change), then it starts to climb (pitch angle), and finally it adjusts the roll (roll angle). The only difference in the reference system used in aviation, from the one shown in this picture is the sign of the Z-axis. This has its justification since the aircraft ascends and increases the pitch angle (at the Z-axis pointing down). In the case of drones, it is not necessary to raise the "nose of the plane" during take-off, so the Z-axis directed upwards seems to be more intuitive. In addition, the forward movement of the drone involves tilting the front of the drone, which in the assumed reference system increases the angle of pitch. This arrangement seems to be the most intuitive for drones and will be used. To ensure the readability of the equations, instead of the angles yaw, pitch and roll will be used in Greek letters: yaw = $\gamma$, pitch = $\beta$, roll = $\alpha$.
 
@@ -53,6 +52,6 @@ Although Euler angles are pretty easy to understand there is one big problem. Re
 
 
 [![image](images/gimbal_lock.png)](images/gimbal_lock.png)
-*Gimbal lock in a real situation*
+<custom_caption>Gimbal lock in a real situation</custom_caption>
 
 So, to answer the title question - all of these names describe the same idea but Euler angles are the most common and the widely known, Tait-Bryan angles are those Euler angles where every rotation is about a different axis and yaw-pitch-roll is one specific set of movement used in aerospace.

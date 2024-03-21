@@ -24,7 +24,7 @@ $$
 \end{gather}
 $$
 
-This is LERP (_Linear Interpolation_) but since, for orientation purpose quaternion needs to have a norm of 1, after this interpolation you need to normalize the result:
+This is LERP (_Linear Interpolation_) but since, for orientation purposes quaternion needs to have a norm of 1, after this interpolation you need to normalize the result:
 
 $$
 \begin{gather}
@@ -32,7 +32,7 @@ $$
 \end{gather}
 $$
 
-and that is NLERP (normalized linear interpolation).
+and that is NLERP (*Normalized Linear Interpolation*).
 
 # Interpretation and consequences
 
@@ -40,8 +40,8 @@ If we imagine a circle with a radius of 1 which is going across quaternions that
 
 
 [![image](images/LERP.png)](images/LERP.png)
-*LERP and NLERP methods presentation*
-{:class="img-responsive"}
+<custom_caption>LERP and NLERP methods presentation</custom_caption>
+
 
 And now if we consider rotation between $\mathbf{q}(0)$ and $\mathbf{q}(1)$ with a constant time interval this motion will not have constant speed at the middle of movement speed will be higher than at the beginning and at the end (visualization and more you can find on this page). The problem of this solution is that it divides distance into equal parts not an angle between quaternions.
 
@@ -53,7 +53,7 @@ $$
 
 
 [![image](images/SLERP_1.png)](images/SLERP_1.png)
-*SLERP when quaternions are orthogonal*
+<custom_caption>SLERP when quaternions are orthogonal</custom_caption>
 
 In most cases, however, the quaternions are not orthogonal to each other. Therefore, you must first determine the difference between quaternion $\mathbf{q}_2$ and the projection of quaternion $\mathbf{q}_2$ onto quaternion $\mathbf{q}_1$. After normalization, the resulting quaternion is unitary and orthogonal to quaternion $\mathbf{q}_1$:
 
@@ -72,7 +72,7 @@ $$
 
 
 [![image](images/SLERP_2.png)](images/SLERP_2.png)
-*SLERP method in the general case*
+<custom_caption>SLERP method in the general case</custom_caption>
 
 The above equations are based on geometric operations for vectors. They are correct, but quaternions allow us to simplify these calculations considerably. For quaternions, you can determine the quaternion $$\mathbf{q}_{\Delta}$$ by which the quaternion $$\mathbf{q}_{1}$$ must be multiplied to obtain $$\mathbf{q}_{2}$$:
 

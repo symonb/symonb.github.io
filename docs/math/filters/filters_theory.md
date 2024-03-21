@@ -366,8 +366,8 @@ $$
 The above function may look complicated but it is really simple. Step functions create a rectangular signal which is multiplied by  $x(kT)$ which is the sample value for $t=kT$. Next, we add these scaled-up rectangles and that's it:
 
 [![image](images/Zrzut%20ekranu%202022-12-09%20010443.png)](images/Zrzut%20ekranu%202022-12-09%20010443.png)
-*The left green rectangular signal is made out of 2 step-function. Next, those rectangular functions are multiplicated by some constants and combined (right plot)*
-{:class="img-responsive"}
+<custom_caption>The left green rectangular signal is made out of 2 step-function. Next, those rectangular functions are multiplicated by some constants and combined (right plot)</custom_caption>
+
 
 From table we can take $\mathcal{L}\{u(t-kT)\} = \frac{e^{-kTs}}{s}$, so:
 
