@@ -5,6 +5,12 @@ parent: Math
 nav_order: 3
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+{: .no_toc}
+
+# Euler angles
+
 <details open markdown="block">
   <summary>
     Table of contents
@@ -33,9 +39,7 @@ $$
 $$
 
 {: .note}
- The set $$z-y'-x^{"}$$ is also called yaw-pitch-roll angles and will be used in my project
-
-
+The set $$z-y'-x^{"}$$ is also called yaw-pitch-roll angles and will be used in my project
 
 Below you can see how Euler angles work in a real situation:
 
@@ -49,7 +53,6 @@ The first picture shows the yaw-pitch-roll convention which is commonly used in 
 # Gimbal Lock
 
 Although Euler angles are pretty easy to understand there is one big problem. Regardless of the rotation scheme chosen, in the case of Euler angles, there is always a position for which it is impossible to determine the 1st and 3rd angles separately. Looking at the figure below, it can be seen that after the 2nd rotation, the 3rd rotation axis ($x_2$) coincides with the 1st rotation axis ($z_0$). Further rotation is equivalent to a rotation of a larger angle ($\gamma+\alpha$) during the 1st rotation. This specific position can be reached by using any combination of 1st and 3rd rotations, as long as their sum is constant. For this position, it is not possible to determine one pair of angles of 1st and 3rd turns. Moreover, the problem with determining these angles starts to appear already in the surroundings of this position.
-
 
 [![image](images/gimbal_lock.png)](images/gimbal_lock.png)
 <custom_caption>Gimbal lock in a real situation</custom_caption>

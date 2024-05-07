@@ -7,6 +7,11 @@ grand_parent: Math
 nav_order: 1
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+{: .no_toc}
+
+# Quaternions - Introduction
 
 <details open markdown="block">
   <summary>
@@ -17,7 +22,6 @@ nav_order: 1
 {:toc}
 </details>
 
-
 # Why quaternions?
 
 The quaternion notation is the least intuitive solution, but it has several advantages that make it very commonly used in many fields that deal with orientation in 3D space. First, however, the basic operations in the domain of quaternions as well as the assumptions made in the following chapters will be described. The main advantages will be seen in the next chapters, but this part is to give some awareness about quaternions properties used in the next operations. Although it is not necessary to understand quaternions up smallest detail, in my opinion, it is really pleasant to know how some mathematics, used in projects works. Also, I hope that this presentation of quaternions (of course not complete and probably fully correct in math rigor) will be more approachable for non-mathematicians.
@@ -27,7 +31,7 @@ The quaternion notation is the least intuitive solution, but it has several adva
 Quaternions are just extensions of complex numbers. They have Real part - $Re(\mathbf{q})$ and Imaginary part - $Im(\mathbf{q})$ but instead of 1, there are 3 imaginary symbols ($i,\ j,\ k$). If the real part is zero then such a quaternion calls a pure quaternion. If the imaginary part is zero it is just a real number.
 
 $$
-\begin{equation} 
+\begin{equation}
 \mathbf{q}=a+bi+cj+dk
 \end{equation}
 $$
@@ -54,7 +58,7 @@ $$
 \begin{align}\begin{split}     \mathbf{q}&=a+bi+cj+dk\\ \nonumber \\ \mathbf{q}^*&=a-bi-cj-dk \end{split}\end{align}
 $$
 
-It is worth noting that the conjugation of the multiplication of quaternions is equal to the reverse multiplication of conjugations of these quaternions: 
+It is worth noting that the conjugation of the multiplication of quaternions is equal to the reverse multiplication of conjugations of these quaternions:
 
 $$
 \begin{equation}  (\mathbf{q}_1\mathbf{q}_2)^*=\mathbf{q}_2^*\mathbf{q}_1^*\label{eq:conjugation of multiplication}\end{equation}
@@ -129,7 +133,7 @@ $$
 \begin{gather} \mathbf{q}^{-1}=\mathbf{q}^*\\\nonumber \\ \mathbf{q}=\cos{\theta}+\mathbf{v}\sin{\theta} \label{eq:quaternion trigonometric form}\\\nonumber \\ \mathbf{q}_2/ \mathbf{q}_1=\mathbf{q}_2\mathbf{q}_1^{*}\label{eq:division right}\\\nonumber \\ \mathbf{q}_1\backslash \mathbf{q}_2=\mathbf{q}_2^{*}\mathbf{q}_1 \\\nonumber \\ \cos{\theta}=\mathbf{q}_1\cdot \mathbf{q}_2\label{eq:cos(theta) quaternions}\end{gather}
 $$
 
-The interpretation of the division (\ref{eq:division right}) is the determination of the quaternion of rotation between quaternions describing 2 orientations in space (from the orientation described by $\mathbf{q}_1$ one can arrive at the orientation $\mathbf{q}_2$ - see [Quaternions as rotations in 3D space](quaternions_as_rotation )).
+The interpretation of the division (\ref{eq:division right}) is the determination of the quaternion of rotation between quaternions describing 2 orientations in space (from the orientation described by $\mathbf{q}_1$ one can arrive at the orientation $\mathbf{q}_2$ - see [Quaternions as rotations in 3D space](quaternions_as_rotation)).
 
 Due to the numerical errors that occur, the norm of a quaternion may differ from unity. Therefore, to preserve the properties of unit quaternions, normalization must be performed. Its performance does not differ in any way from the normalization of a 4D vector:
 

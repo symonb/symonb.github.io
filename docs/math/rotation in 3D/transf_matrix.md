@@ -5,6 +5,11 @@ parent: Math
 nav_order: 3
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+{: .no_toc}
+
+# Transformation and Rotation matrices
 
 <details open markdown="block">
   <summary>
@@ -19,20 +24,17 @@ nav_order: 3
 
 The transformation matrix is a much wider concept but for orientation in 3D space, we will restrict it into a rotation matrix. So transformation matrix transforms (wow) any vector from one reference frame into the other:
 
-
 $$
-\begin{gather} \mathbf{v}^{(0)}=\mathbf{R}_{1}^{0}\mathbf{v}^{(1)} 
+\begin{gather} \mathbf{v}^{(0)}=\mathbf{R}_{1}^{0}\mathbf{v}^{(1)}
 \end{gather}
 $$
 
-Rotation matrix rotates any vector about a specific axis and about a set angle (in this example rotation of vector $\mathbf{v}=\left[\begin{array}{ccc} 1,1,1\end{array}\right]^T$ about $90^{\circ}$  in Z-axis):
-
+Rotation matrix rotates any vector about a specific axis and about a set angle (in this example rotation of vector $\mathbf{v}=\left[\begin{array}{ccc} 1,1,1\end{array}\right]^T$ about $90^{\circ}$ in Z-axis):
 
 $$
 \begin{gather}\mathbf{v'=\mathbf{R}_z(90^{\circ})\mathbf{v}}=\left[\begin{array}{ccc} 0 & -1 & 0\\ 1 & 0 & 0\\    0 & 0 & 1   \end{array}\right]    \left[\begin{array}{c}1\\1\\1    \end{array}\right]=     \left[\begin{array}{c}      -1\\    1\\    1    \end{array}\right]
 \end{gather}
 $$
-
 
 # Rotation and Transformation
 
@@ -43,30 +45,25 @@ Assuming that a certain reference system ($\pi_1$) is associated with the object
 [![image](images/macierz%20rotacji.png)](images/macierz%20rotacji.png)
 
 $$
-\begin{gather}\label{eq:transformation matrix}  \mathbf{R}_{1}^0=\left[\mathbf{i}^{(0)},\mathbf{j}^{(0)},\mathbf{k}^{(0)}    \right]=    \left[    \begin{array}{ccc}       i_x &j_x & k_x \\      i_y & j_y & k_y \\       i_z & j_z &k_z    \end{array}    \right]    
+\begin{gather}\label{eq:transformation matrix}  \mathbf{R}_{1}^0=\left[\mathbf{i}^{(0)},\mathbf{j}^{(0)},\mathbf{k}^{(0)}    \right]=    \left[    \begin{array}{ccc}       i_x &j_x & k_x \\      i_y & j_y & k_y \\       i_z & j_z &k_z    \end{array}    \right]
 \end{gather}
 $$
 
-
 Due to the orthogonality of this matrix, its inverse is equal to its transposition:
-
 
 $$
 \begin{gather}\mathbf{R}_{1}^{0}\mathbf{R}_{0}^{1}= \mathbf{I}\Rightarrow (\mathbf{R}_{1}^{0})^{-1}=\mathbf{R}_{0}^{1}=(\mathbf{R}_{1}^{0})^{T}
 \end{gather}
 $$
 
-
 The transformation matrix defines explicitly the orientation and in a very simple way allows to perform the transformation of vectors from one system to another. It is also quite intuitive. Unfortunately, due to numerical inaccuracies, it quickly happens that the matrix is not normalized (loses orthonormality) and it is necessary to normalize it, which is a rather computationally expensive process.
 
 Euler angles can be easily extracted from the transformation matrix. This can be seen very well when one writes the transformation matrix in 3D space as a complex of 3 basic rotations (rotations about 3 principal axes of the global system). For the rotation scheme $Z^{(0)}-Y^{(1)}-X^{(2)}$ (used for the drone) it looks as follows:
-
 
 $$
 \begin{gather}\mathbf{R}_{1}^0=\mathbf{R}_z(yaw)\mathbf{R}_y(pitch)\mathbf{R}_x(roll)=\label{eq:euler angle to R}\\  \nonumber\\    \left|       \mathbf{R}_z(\gamma)=  \left[     \begin{array}{ccc}         \cos{\gamma} & -\sin{\gamma} & 0 \\         \sin{\gamma} & \cos{\gamma} & 0 \\          0 & 0 & 1     \end{array}     \right]    \mathbf{R}_y(\beta)=\left[\begin{array}{ccc}        \cos{\beta} & 0 & \sin{\beta} \\        0 & 1 & 0  \\        -\sin{\beta} & 0 & \cos{\beta}    \end{array}     \right] \mathbf{R}_x(\alpha)=    \left[    \begin{array}{ccc}        1 & 0 & 0 \\        0 & \cos{\alpha} & -\sin{\alpha}  \\        0 & \sin{\alpha} & \cos{\alpha}    \end{array}        \right]    \right| \nonumber\\ \nonumber\\   =\left[    \begin{array}{ccc}         \cos{\gamma}\cos{\beta} & \cos{\gamma}\sin{\beta}\sin{\alpha}-\sin{\gamma}\cos{\alpha} & \cos{\gamma}\sin{\beta}\cos{\alpha}+\sin{\gamma}\sin{\alpha}\\         \sin{\gamma}\cos{\beta} & \sin{\gamma}\sin{\beta}\sin{\alpha}+\cos{\gamma}\cos{\alpha} &\sin{\gamma}\sin{\beta}\cos{\alpha}-\cos{\gamma}\sin{\alpha} \\          -\sin{\beta} & \cos{\beta}\sin{\alpha} & \cos{\beta}\cos{\alpha}     \end{array}  \right] \label{eq:transformation matrix 3D}
 \end{gather}
 $$
-
 
 # Euler angles from transoramtion matrix
 

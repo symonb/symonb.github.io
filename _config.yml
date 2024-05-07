@@ -31,7 +31,10 @@ github_username: symonb
 # Build settings
 theme: just-the-docs
 plugins:
-  - jekyll-feed
+  - jekyll-
+  
+plugins:
+  - jekyll-toc
 
 plugins:
   - jekyll-default-layout

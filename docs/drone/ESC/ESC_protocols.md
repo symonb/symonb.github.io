@@ -4,11 +4,14 @@ title: ESC protocols overview
 nav_order: 1
 parent: ESC
 grand_parent: Drone
+toc: true
 ---
 
-# ESC protocols
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
 
 {: .no_toc}
+
+# ESC protocols
 
 <details open markdown="block">
   <summary>

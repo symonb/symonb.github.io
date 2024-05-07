@@ -7,6 +7,11 @@ permalink: /docs/math/quaternions/quaternions_as_rotation
 nav_order: 3
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+{: .no_toc}
+
+# Quaternions as rotation
 
 <details open markdown="block">
   <summary>
@@ -33,26 +38,23 @@ $$
 \begin{equation}    \mathbf{q}=\cos{\frac{\theta}{2}}+[v_xi,v_yj,v_zk]\sin{\frac{\theta}{2}}\label{eq:trigonometric_form_long}\end{equation}
 $$
 
-
 It can now be seen that the imaginary part of the quaternion can be treated as the vector defining the axis of rotation, and the part $Re(\mathbf{q})$ is equal to the cosine of half the angle of rotation about this axis. We can also see that the inverse quaternion is a rotation about the same axis, but in the opposite direction:
 
 $$
 \begin{gather}    \mathbf{q}^{-1}=\cos{\frac{-\theta}{2}}+[v_xi,v_yj,v_zk]\sin{\frac{-\theta}{2}}=\cos{\frac{\theta}{2}}-[v_xi,v_yj,v_zk]\sin{\frac{\theta}{2}}  \end{gather}
 $$
-  
+
 rotation about angle $\theta$, and next $-\theta$ about the same axis $\mathbf{v}$ returns to the original position - as we know:
-  
+
 $$
 \begin{gather}    \mathbf{q}^{-1}\mathbf{q}=1 \end{gather}
 $$
-
 
 Due to the intuitive division of the quaternion into a real part - describing the angle of rotation and an imaginary part - describing the axis of rotation, it is common to see the quaternion written in the form:
 
 $$
 \begin{equation}    \mathbf{q}=q_w+q_xi+q_yj+q_zk\end{equation}
 $$
-
 
 This form of notation will be used, in some places because of its intuitive interpretation.
 
@@ -61,14 +63,14 @@ Just as in the domain of complex numbers, rotations can be summed by multiplying
 $$
 \begin{gather}    \mathbf{q}_3=\mathbf{q}_2\mathbf{q}_1\label{eq:combining rotations}\end{gather}
 $$
- 
-using it and (\ref{eq:rotation}) we can write rotation of vector $\mathbf{p}$ from 1st to 3rd orientation:    
+
+using it and (\ref{eq:rotation}) we can write rotation of vector $\mathbf{p}$ from 1st to 3rd orientation:
 
 $$
 \begin{gather}\mathbf{p}''=\mathbf{q}_3\mathbf{p}\mathbf{q}_3^*=\mathbf{q}_2\mathbf{q}_1\mathbf{p}\mathbf{q}_1^*\mathbf{q}_2^*\end{gather}
 $$
 
-due to the separability of multiplication:   
+due to the separability of multiplication:
 
 $$
 \begin{gather}\mathbf{p}''=\mathbf{q}_2\left(\mathbf{q}_1\mathbf{p}\mathbf{q}_1^*\right)\mathbf{q}_2^*\end{gather}
@@ -113,13 +115,11 @@ $$
 \begin{gather}\begin{aligned}\mathbf{q}_{\gamma}&=\left[\cos{\frac{\gamma}{2}},0,0,\sin{\frac{\gamma}{2}}\right]\\\mathbf{q}_{\beta}&=\left[\cos{\frac{\beta}{2}},0,\sin{\frac{\beta}{2}},0\right]\\\mathbf{q}_{\alpha}&=\left[\cos{\frac{\alpha}{2}},\sin{\frac{\alpha}{2}},0,0\right]\\ \end{aligned}\\ \nonumber \\ {}^{1}_{0}{\mathbf{q}}={}^{0}_{1}{\mathbf{q}}^*= (\mathbf{q}_{\gamma}\mathbf{q}_{\beta}\mathbf{q}_{\alpha})^*= \left[\begin{array}{c}  \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\    -\sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\      -\cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} - \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}}\\      -\cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}}\end{array}\right]\label{eq:euler to quaternion}\end{gather}
 $$
 
-
 Thus, the Euler angles from the quaternion notation can be obtained according to the formulas:
 
 $$
 \begin{gather}\begin{aligned}\gamma&=atan2(2(q_xq_y-q_wq_z),q_w^2+q_x^2-q_y^2-q_z^2)\\ \beta&=\arcsin{(2(-q_xq_z-q_wq_y))}\\ \alpha&=atan2(2(q_yq_z-q_wq_x),q_w^2-q_x^2-q_y^2+q_z^2)\end{aligned}\label{eq:quaternion to euler}\end{gather}
 $$
-
 
 Conversion from quaternion (${}^{1}_{0}{\mathbf{q}}=a+bi+cj+dk$) to transformation matrix is also possible with the following formula:
 
@@ -127,17 +127,14 @@ $$
 \begin{gather}\mathbf{R}_{0}^{1}\left({}^{1}_{0}{\mathbf{q}}\right)=\left[\begin{array}{ccc}    a^2+b^2-c^2-d^2 & 2bc-2ad & 2bd+2ac\\    2bc+2ad & a^2-b^2+c^2-d^2 & 2cd-2ab\\    2bd-2ac & 2cd+2ab & a^2-b^2-c^2+d^2    \end{array}\right]\label{eq:quaternion to matrix}\end{gather}
 $$
 
-
 The inverse process ($\mathbf{R\rightarrow q}$) should not be carried out explicitly because of the numerical errors involved. Obtaining the quaternion of the rotation should be done thoughtfully, taking into account these inaccuracies as discussed in this [paper](https://upcommons.upc.edu/bitstream/handle/2117/124384/2068-Accurate-Computation-of-Quaternions-from-Rotation-Matrices.pdf) or [here](https://en.wikipedia.org/wiki/Rotation_matrix#Quaternion).
 
 Some great videos on this topic: [quaternions](https://www.youtube.com/watch?v=d4EgbgTm0Bg), [quaternions rotation](https://www.youtube.com/watch?v=zjMuIxRvygQ)
 
-# Double coverage 
+# Double coverage
 
 A property of quaternions is that any configuration in 3D space can be expressed by 2 unit quaternions: q and -q. Intuitively, this can be explained as follows:
-quaternion  $1,0,0,0$ represents a non-rotated object,
-double multiplication with quaternion $[0,i,0,0]$ gives as a product $[-1,0,0,0$, the identical quaternion is obtained when multiplying twice by the quaternion $[0,0,j,0]$, $[0,0,0,k]$ or any other pure quaternion,   
+quaternion $1,0,0,0$ represents a non-rotated object,
+double multiplication with quaternion $[0,i,0,0]$ gives as a product $[-1,0,0,0$, the identical quaternion is obtained when multiplying twice by the quaternion $[0,0,j,0]$, $[0,0,0,k]$ or any other pure quaternion,  
  it can be seen that pure quaternions (e.g. $[0,i,0,0]$, $[0,0,j,0]$, $[0,0,0,k]$) must represent a rotation of $180^{\circ}$, since their double "use" results in the same quaternion ($[-1,0,0,0]$). In 3D space, arriving at an identical position in 2 identical rotations for any axis can only be done by rotating by $180^{\circ}$ twice. This returns the object to its original position.
 The above description shows that the quaternion $[1,0,0,0]$ and $[-1,0,0,0]$ describe an identical setting in 3D space. It can also be seen that to return to the original quaternion one must multiply it 4 times by the pure quaternion. Which, as described above, involves rotating the object 2 times in 3D space. Therefore, in some publications, the full rotation of the quaternion is divided into $720^{\circ}$. The quaternions describing a rotation by angle $\theta$ and $360^{\circ}+\theta$ are not identical although they describe the same orientation in 3D space.
-
-

@@ -6,11 +6,14 @@ nav_order: 4
 parent: STM32
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+{: .no_toc}
 [![image](images/dev_1/noide.png)](images/dev_1/noide.png)
 
-# STM32 development workflow part 2
-
 {:.no_toc}
+
+# STM32 development workflow part 2
 
 <details open markdown="block">
   <summary>

@@ -6,11 +6,13 @@ nav_order: 3
 parent: STM32
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
 [![image](images/dev_1/noide.png)](images/dev_1/noide.png)
 
-# STM32 development workflow part 1
-
 {: .no_toc }
+
+# STM32 development workflow part 1
 
 <details open markdown="block">
   <summary>
@@ -106,9 +108,9 @@ Install it in your newly created folder _C:\tools\CMake_.
 
 [![image](images/dev_1/Zrzut%20ekranu%202024-02-18%20161604.png)](images/dev_1/Zrzut%20ekranu%202024-02-18%20161604.png)
 
-### What is CMake?
-
 {: .no_toc }
+
+### What is CMake?
 
 CMake is an extensible, open-source system that manages the build process in a platform-independent and compiler-independent manner.
 This is not building software – those are: _Make_, _Ninja_… But CMake is a “build generator” allowing you to use any building program you like and create in a more convenient way final main.elf or _main.bin_ or _main.hex_ or any other executable programs.

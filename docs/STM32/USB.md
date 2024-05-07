@@ -5,7 +5,13 @@ parent: STM32
 nav_order: 5
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
 [![image](images/USB/1692358761772349-0.jpg)](images/USB/1692358761772349-0.jpg)
+
+{: .no_toc}
+
+# USB with STM32
 
 <details open markdown="block">
   <summary>

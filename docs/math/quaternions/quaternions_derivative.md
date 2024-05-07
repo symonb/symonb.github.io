@@ -6,6 +6,13 @@ grand_parent: Math
 nav_order: 2
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+![image](images/quaternion%20derivative.png){:class="img-responsive"}
+
+{: .no_toc}
+
+# Quaternion derivative
 
 <details open markdown="block">
   <summary>
@@ -15,8 +22,6 @@ nav_order: 2
 1. TOC
 {:toc}
 </details>
-
-![image](images/quaternion%20derivative.png){:class="img-responsive"}
 
 # Intro
 
@@ -58,7 +63,7 @@ $$
 \begin{gather} \dot{\mathbf{q}}(t) =\lim_{\Delta t\to 0} \frac{\left(1+ \mathbf{v}\frac{\omega}{2}\Delta t-1\right)\mathbf{q}(t)}{\Delta t}=\nonumber\\=\lim_{\Delta t\to 0} \frac{\mathbf{v}\frac{\omega}{2}\Delta t}{\Delta t}\mathbf{q}(t) =\frac{1}{2}\boldsymbol{\omega}\mathbf{q}(t) \end{gather}
 $$
 
-# Option II: Natural interpretation 
+# Option II: Natural interpretation
 
 Now, let's see a more pleasant way to obtain a derivate - based on the interpretation of quaternions as rotations.
 The quaternion describing the rotation from the initial position to the current position can be written as:
@@ -77,12 +82,12 @@ from direct calculations, it can be shown that:
 
 $$
 \begin{gather}
-e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}=\mathbf{v}\frac{\omega}{2}e^{\mathbf{v}\frac{\omega}{2}t} 
+e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}=\mathbf{v}\frac{\omega}{2}e^{\mathbf{v}\frac{\omega}{2}t}
 \end{gather}
 $$
 
-{: .warning } 
-In general multiplication (of quaternions) is not commutative. See [the end](#section_last) of this post for an explanation. 
+{: .warning }
+In general multiplication (of quaternions) is not commutative. See [the end](#section_last) of this post for an explanation.
 
 additionally $\mathbf{v}\omega$ = $\boldsymbol{\omega}$ so:
 
@@ -92,13 +97,12 @@ $$
 \end{gather}
 $$
 
-
 # The importance of the reference frame
 
 The above formulas for the derivative of the quaternion of rotation use the quaternion q which is the quaternion transforming from the drone-related system to the global frame. However, the quaternion describing the transformation from the global system to the local system is more commonly used. We know that:
 
 $$
-\begin{gather}  
+\begin{gather}
  {}^{b}_{g}\mathbf{q}={}^{g}_{b}=\mathbf{q}^{-1}={}^{g}_{b}\mathbf{q}^{*}
 \end{gather}
 $$
@@ -106,11 +110,10 @@ $$
 analogically derivative:
 
 $$
-\begin{gather}   
+\begin{gather}
  {}^{b}_{g}\dot{\mathbf{q}}={}^{g}_{b}\dot{\mathbf{q}}^{*}
  \end{gather}
 $$
-
 
 using a formula for conjugation of quaternions multiplication:
 
@@ -118,13 +121,13 @@ $$
 \begin{gather}
 {}^{b}_{g}\dot{\mathbf{q}}=\left( \frac{1}{2}\boldsymbol{\omega}{}^{g}_{b}\mathbf{q}(t)\right)^{*}=\frac{1}{2} {}^{g}_{b}\mathbf{q}(t)^{*}\boldsymbol{\omega}^{*}=-\frac{1}{2}{}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}
 \end{gather}
- $$
+$$
 
 Note, that the $\boldsymbol{\omega}$ which was used in the above formulas is a vector in the global system. We were considering quaternions which describe global rotation from default orientation to end one. The measurements of the gyroscope are taken in the local frame. Taking this into account, it can be written:
 
 $$
 \begin{gather}
-\begin{split}   {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\left( {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{g}_{b}\mathbf{q}(t)^{*}\right)}=\\    =-\frac{1}{2} {}^{b}_{g}\mathbf{q}(t) {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)  
+\begin{split}   {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\left( {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{g}_{b}\mathbf{q}(t)^{*}\right)}=\\    =-\frac{1}{2} {}^{b}_{g}\mathbf{q}(t) {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)
 \end{split}
 \end{gather}
 $$
@@ -132,7 +135,7 @@ $$
 So, this is the final equation:
 
 $$
-\begin{gather}  
+\begin{gather}
  {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t) \label{eq:derivative of quaternion}
 \end{gather}
 $$
@@ -140,7 +143,7 @@ $$
 It takes gyroscope measurements in the local frame (drone frame) and quaternion that describes the transformation from the global frame to the local frame. If you want to use the same quaternion but measurements are in the global frame you need to use:
 
 $$
-\begin{gather}  
+\begin{gather}
  {}^{b}_{g}\dot{\mathbf{q}}=\frac{1}{2} {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}
  \end{gather}
 $$
@@ -148,8 +151,8 @@ $$
 If you have the measurements in the global frame and quaternion describing the rotation from the global to the local frame you can use the:
 
 $$
-\begin{gather}  
- {}^{g}_{b}\dot{\mathbf{q}}=\frac{1}{2}\boldsymbol{\omega}^{(g)} {}^{g}_{b}\mathbf{q}(t) 
+\begin{gather}
+ {}^{g}_{b}\dot{\mathbf{q}}=\frac{1}{2}\boldsymbol{\omega}^{(g)} {}^{g}_{b}\mathbf{q}(t)
 \end{gather}
 $$
 

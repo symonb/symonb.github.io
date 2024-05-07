@@ -7,6 +7,12 @@ parent: ESC
 grand_parent: Drone
 ---
 
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+{: .no_toc}
+
+# ESC protocols (PWM, OneShot125, DShot) implementation
+
 <details open markdown="block">
   <summary>
     Table of contents
