@@ -311,6 +311,10 @@ However, step response in such a designed system does not match with the respons
 When we control motors or another analogue plant with a discrete controller we don't use impulses to to control our plant. Usually, computed control signals are sent to DAC (_Digital to Analog Converter_) which transforms discrete impulses into step functions. Then these step functions can be fed into an analogue plant. Therefore we are more interested into tho response of the plant with a DAC.
 
 [![image](images/Zrzut%20ekranu%202022-12-08%20104912.png)](images/Zrzut%20ekranu%202022-12-08%20104912.png){:class="img-responsive"}
+<custom_caption>How typical DAC transform signal from discrete (red) to continuous (green)</custom_caption>
+
+[![image](images/Zrzut%20ekranu%202024-06-03%152356.png)](images/Zrzut%20ekranu%202024-06-03%152356.png){:class="img-responsive"}
+
 
 The DAC influences the transfer function and thus changes the response. To take into account we need to add the transfer function of ZOH. In essence, we can:
 
