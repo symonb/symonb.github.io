@@ -443,13 +443,13 @@ Ok, so we can use eq.(\ref{eq:FOH_pred}) to discretize our system and receive th
 
 The results are a bit off (see the graph at the end). That's because this method called "predictive first-order hold" tries to predict the next sample value with current input and one previous (see eq.(\ref{eq:FOH_p1})). So basically we analyze the case when FOH works like this:
 
-[![image](images/FOH%20predictive2.png)](images/FOH%20predictive2.png){:class="img-responsive"}
+[![image](images/FOH%20predictive.png)](images/FOH%20predictive.png){:class="img-responsive"}
 <custom_caption>System with predictive FOH as DAC</custom_caption>
 
-[![image](images/FOH%20predictive.png)](images/FOH%20predictive.png){:class="img-responsive"}
-<custom_caption>Impulse input (left) and other input (right) after predictive FOH </custom_caption>
+[![image](images/FOH%20predictive2.png)](images/FOH%20predictive2.png){:class="img-responsive"}
+<custom_caption>Impulse input (left) and some other input (right) after predictive FOH </custom_caption>
 
-It works for smooth monotonic outputs but fails on sharp curves. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ sample and interpolate between known values. You can make math yourself (is similar to this above), but in the end, we have:
+It works for smooth monotonic outputs but fails on sharp curves. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ sample and interpolate between known values. You can make math yourself (similar to this above), but in the end, we have:
 
 $$
 \begin{gather}
@@ -459,10 +459,12 @@ $$
 
 which produces this:
 
-[![image](images/FOH%20casual.png)](images/FOH%20casual.png){:class="img-responsive"}
+[![image](images/FOH%20casual.png)](images/FOH%20casual.png){:class="img-responsive"}<custom_caption>Impulse input (left) and some other input (right) after casual FOH</custom_caption>
 
-Better, but this is still not the same result as Matlab gives. Values are correct but shifted by 1 period. That is because we wanted to interpolate between points as a linear function. We need to wait 1 period to get the next value and then interpolate. To remove that delay let's just add one z to the nominator and call it a day.
+Better, but this is still not the same result as Matlab gives (see yellow line \ref{fig:fig1}). Values are correct but shifted by 1 period. That is because we wanted to interpolate between points as a linear function. We need to wait 1 period to get the next value and then interpolate. To remove that delay let's just add one z to the nominator and call it a day.
+
 Stop for a minute.
+
 When we added z to the nominator this transfer function became non-casual. Can we use the non-casual functions if they are impossible to realize in real life? 
 
 Our goal is to recreate values of the sampled output signal received from our plant for given input signals - in this case, ramp functions. We want to recreate in the discrete domain the same outputs as in continuous - this isn't possible in real life but can be simulated. Therefore we can analyze our system response in a discrete version with values matching the analogue plant response although there is no possibility of creating a digital version which would behave exactly as the analogue (the same response without any delay). 
@@ -473,7 +475,7 @@ $$
 
 This method is also called the ramp-invariant or triangle-hold method (impulse response gives some clue why). As you can suspect this method gives identical discrete values as a sampled response of the continuous system when we apply a ramp input. Let's compare ramp responses of all FOH methods we've described:
 
-[![image](images/ramp%20responses.png)](images/ramp%20responses.png){:class="img-responsive"}<custom_caption>Ramp response fro different discretization methods</custom_caption>
+[![image](images/ramp%20responses.png)](images/ramp%20responses.png){:class="img-responsive"}<custom_caption>Ramp response fro different discretization methods</custom_caption>\label{fig:fig1}
 
 As you can see Matlab version of FOH discretization gives the same values as the original continuous response for sample points. Yellow points are the same as the previous but shifted one period (as we expected for one more $z$ in the denominator). Quite interesting is the predictive FOH response which at first gives a bit of error but then it catches up and is pretty similar to a "Matlab version".
 
