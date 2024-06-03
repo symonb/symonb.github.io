@@ -313,10 +313,10 @@ When we control motors or another analogue plant with a discrete controller we d
 [![image](images/Zrzut%20ekranu%202022-12-08%20104912.png)](images/Zrzut%20ekranu%202022-12-08%20104912.png){:class="img-responsive"}
 <custom_caption>How typical DAC transform signal from discrete (red) to continuous (green)</custom_caption>
 
-[![image](images/Zrzut%20ekranu%202024-06-03%152356.png)](images/Zrzut%20ekranu%202024-06-03%152356.png){:class="img-responsive"}
+[![image](images/Zrzut%20ekranu%202024-06-03%20152356.png)](images/Zrzut%20ekranu%202024-06-03%20152356.png){:class="img-responsive"}
+<custom_caption>We want to discretize our plant with DAC</custom_caption>
 
-
-The DAC influences the transfer function and thus changes the response. To take into account we need to add the transfer function of ZOH. In essence, we can:
+The DAC influences the transfer function of our system and thus changes the response. To take into account we need to add the transfer function of ZOH. Equation for that is pretty simple:
 
 $$
 \begin{gather}
@@ -324,6 +324,7 @@ $$
 \end{gather}
 $$
 
+### Derivation 
 Let's see how this was achieved - start with the Laplace transform of sampled continuous response:
 
 $$
@@ -385,8 +386,10 @@ H_{ZOH}(z)= (1-z^{-1}) \mathcal{Z} \left\{\mathcal{L}^{-1}\left\{\frac{H(s)}{Ts}
 \end{gather}
 $$
 
-## FOH
+If we use this method of discretization our system will have the same step response as analogue one. If you want to use the step function as the input for your system use the ZOH method to discretize your plant.
 
+## FOH
+The ZOH method gives proper responses for step function but what if we want to check responses for smoother inputs? Maybe ramp function?  
 If we consider higher order of eq.(\ref{eq:ZOH2}) we can write:
 
 $$
@@ -398,9 +401,9 @@ $$
 we don't know value of $x((k+1)T)$ but we can use $x((k-1)T)$ to approximate:
 
 $$
-\begin{gather*}
+\begin{gather}
 h_{FOH}(kT)=x(kT)=a_{1}T+x((k-1)T)\Rightarrow a_{1} = \frac{x(kT)-x((k-1)T)}{T}
-\end{gather*}
+\end{gather} \label{eq:FOH_p1}
 $$
 
 after some transformations (similar to these done for ZOH) we get:
@@ -411,7 +414,7 @@ h_{FOH}(t)=\frac{1}{T}\sum_{k=0}^{\infty} \left( x(kT) + \frac{x(kT)-x((k-1)T)}{
  \end{gather*}
 $$
 
-Let's apply a Laplace transform:
+let's apply a Laplace transform:
 
 $$
 \begin{gather*}
@@ -419,19 +422,33 @@ $$
 \end{gather*}
 $$
 
-Not looking encouraging but let's rearrange this and notice that $$x((k-1)T) \overset{k=0}{=} x(-T) = 0$$:
+Not encouraging, but let's rearrange this and notice that $$x((k-1)T) \overset{k=0}{=} x(-T) = 0$$:
 
 $$
 \begin{gather}
-H_{FOH}(s)=\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-e^{-Ts}}{s}- \frac{e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x((k-1)T) e^{-kTs} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}} \right)= \nonumber \\ =\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-(k+1)Ts} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}}\right)\nonumber = \\ = \frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}+e^{-2Ts}}{s}+\frac{1-2e^{-Ts}+ e^{-2Ts}}{Ts^2}\right)= \nonumber \\  = \frac{1}{T} \sum_{k=0}^{\infty} x(kT) e^{-kTs} \left( \frac{(1-e^{-Ts})^2}{s}+\frac{(1-e^{-Ts})^2}{Ts^2}\right)=\nonumber \\  =\underbrace{\sum _{k=0}^{\infty}x(kT) e^{-kTs}}_{H(s)}\underbrace{\left(\frac{1-e^{-Ts}}{s}\right)^2\frac{Ts+1}{T^2}}_{G_{FOH}(s)}
+H_{FOH}(s)=\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-e^{-Ts}}{s}- \frac{e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x((k-1)T) e^{-kTs} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}} \right)= \nonumber \\ =\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-(k+1)Ts} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}}\right)\nonumber = \\ = \frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}+e^{-2Ts}}{s}+\frac{1-2e^{-Ts}+ e^{-2Ts}}{Ts^2}\right)= \nonumber \\  = \frac{1}{T} \sum_{k=0}^{\infty} x(kT) e^{-kTs} \left( \frac{(1-e^{-Ts})^2}{s}+\frac{(1-e^{-Ts})^2}{Ts^2}\right)=\nonumber \\  =\underbrace{\sum _{k=0}^{\infty}x(kT) e^{-kTs}}_{H(s)}\underbrace{\left(\frac{1-e^{-Ts}}{s}\right)^2\frac{Ts+1}{T^2}}_{G_{FOH}(s)} 
 \end{gather}
 $$
 
-After all, that effort, is it any good?
+Finally, we can write:
+
+$$
+\begin{gather}
+H_{FOH}(s) =  \mathcal{L}\{ h_{FOH}(t)\} =\underbrace{\sum _{k=0}^{\infty}x(kT) e^{-kTs}}_{H(s)}\underbrace{\left(\frac{1-e^{-Ts}}{Ts}\right)^2(Ts+1)}_{G_{FOH}(s)}\nonumber \\ H_{FOH}(z) =\left(\frac{z-1}{z}\right)^2 \mathcal{Z}\left\{ \mathcal{L^{-1}}\left \{H(s)\frac{Ts+1}{T^2s^2} \right\} \right\}\label{eq:FOH_pred}
+ \end{gather}
+$$
+
+Ok, so we can use eq.(\ref{eq:FOH_pred}) to discretize our system and receive the same values as the analogue for the ramp function? - Not really
+
+The results are a bit off (see the graph at the end). That's because this method called "predictive first-order hold" tries to predict the next sample value with current input and one previous (see eq.(\ref{eq:FOH_p1})). So basically we analyze the case when FOH works like this:
+
+[![image](images/FOH%20predictive2.png)](images/FOH%20predictive2.png){:class="img-responsive"}
+<custom_caption>System with predictive FOH as DAC</custom_caption>
 
 [![image](images/FOH%20predictive.png)](images/FOH%20predictive.png){:class="img-responsive"}
+<custom_caption>Impulse input (left) and other input (right) after predictive FOH </custom_caption>
 
-The results are a bit sketchy. That's because this method called "predictive first-order hold" extrapolates, or tries to predict the next sample value. It works for smooth monotonic outputs but fails on sharp curves. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ sample and interpolate between known values. You can make math yourself (is similar to this above), but in the end, we have:
+It works for smooth monotonic outputs but fails on sharp curves. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ sample and interpolate between known values. You can make math yourself (is similar to this above), but in the end, we have:
 
 $$
 \begin{gather}
@@ -443,7 +460,11 @@ which produces this:
 
 [![image](images/FOH%20casual.png)](images/FOH%20casual.png){:class="img-responsive"}
 
-Better, but this is still not the same result as Matlab gives. Values are correct but shifted by 1 period. That is because we wanted to interpolate between points as a linear function. We need to wait 1 period to get the next value and then interpolate. But this is a problem when we want to produce a continuous signal from the discrete signal. Our goal is to recreate values of the sampled signal and between values is not so important. So let's add one z to the nominator (make this transfer function non-casual in the s domain). But can we use the non-casual functions? In the discrete world - yes, not anyone but when the nominator and denominator are of the same order it is fine. When we get a new value of input our output can give some value because we only focus on discrete values. when we would like to create a linear continuous function from these inputs we have to wait for the next input to interpolate between neighboring points.
+Better, but this is still not the same result as Matlab gives. Values are correct but shifted by 1 period. That is because we wanted to interpolate between points as a linear function. We need to wait 1 period to get the next value and then interpolate. To remove that delay let's just add one z to the nominator and call it a day.
+Stop for a minute.
+When we added z to the nominator this transfer function became non-casual. Can we use the non-casual functions if they are impossible to realize in real life? 
+
+Our goal is to recreate values of the sampled output signal received from our plant for given input signals - in this case, ramp functions. We want to recreate in the discrete domain the same outputs as in continuous - this isn't possible in real life but can be simulated. Therefore we can analyze our system response in a discrete version with values matching the analogue plant response although there is no possibility of creating a digital version which would behave exactly as the analogue (the same response without any delay). 
 
 $$
 \begin{gather} H_{FOH}(z) =\frac{(z-1)^2}{z} \mathcal{Z}\left\{ \mathcal{L^{-1}}\left \{\frac{H(s)}{T^2s^2} \right\} \right\} \end{gather}
@@ -451,7 +472,7 @@ $$
 
 This method is also called the ramp-invariant or triangle-hold method (impulse response gives some clue why). As you can suspect this method gives identical discrete values as a sampled response of the continuous system when we apply a ramp input. Let's compare ramp responses of all FOH methods we've described:
 
-[![image](images/ramp%20responses.png)](images/ramp%20responses.png){:class="img-responsive"}
+[![image](images/ramp%20responses.png)](images/ramp%20responses.png){:class="img-responsive"}<custom_caption>Ramp response fro different discretization methods</custom_caption>
 
 As you can see Matlab version of FOH discretization gives the same values as the original continuous response for sample points. Yellow points are the same as the previous but shifted one period (as we expected for one more $z$ in the denominator). Quite interesting is the predictive FOH response which at first gives a bit of error but then it catches up and is pretty similar to a "Matlab version".
 
