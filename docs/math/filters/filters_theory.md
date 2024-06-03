@@ -386,10 +386,11 @@ H_{ZOH}(z)= (1-z^{-1}) \mathcal{Z} \left\{\mathcal{L}^{-1}\left\{\frac{H(s)}{Ts}
 \end{gather}
 $$
 
-If we use this method of discretization our system will have the same step response as analogue one. If you want to use the step function as the input for your system use the ZOH method to discretize your plant.
+If we use this method of discretization our system will have the same step response as analogue one. If you want to use the step functions as the input for your system use the ZOH method to discretize your plant.
 
 ## FOH
 The ZOH method gives proper responses for step function but what if we want to check responses for smoother inputs? Maybe ramp function?  
+
 If we consider higher order of eq.(\ref{eq:ZOH2}) we can write:
 
 $$
@@ -401,9 +402,9 @@ $$
 we don't know value of $x((k+1)T)$ but we can use $x((k-1)T)$ to approximate:
 
 $$
-\begin{gather}
+\begin{gather} \label{eq:FOH_p1}
 h_{FOH}(kT)=x(kT)=a_{1}T+x((k-1)T)\Rightarrow a_{1} = \frac{x(kT)-x((k-1)T)}{T}
-\end{gather} \label{eq:FOH_p1}
+\end{gather}
 $$
 
 after some transformations (similar to these done for ZOH) we get:
