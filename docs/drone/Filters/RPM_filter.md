@@ -30,9 +30,9 @@ As we know, the main source of the noise in measurements of the gyro or accelero
 
 ## Structure
 
-The basic idea is to calculate coefficients for a set of notch filters each time the new RPMs are available and apply them for current measurements. We need a notch filter for each motor (`MOTORS_COUNT = 4` in my case) for each measurement (each axis needs separate 4 filters).
+The basic idea is to calculate coefficients for a set of notch filters each time the new RPMs are available and apply them for current measurements (gyro or accelerometer). Thus we need a notch filter for each motor (`MOTORS_COUNT = 4` in my case) for each measurement (each axis needs separate 4 filters). That gives us 12 notch filters in total to filter gyro measurements.
 
-However, we have to take into consideration not only the basic frequency of the motors but also the higher-frequency noise that is present in our signal. They are caused by n-blade propellers that interact with frame n-time more often than motors themselves and are called harmonics (since they are integer multiplication of motors' RPMs) (more about it [here](../../math/vibrations/vibrations_theory#harmonics)). Bearing this in mind we need `MOTORS_COUNT * RPM_MAX_HARMONICS` notch filters for each measurement (12 in my case for X/Y/Z gyro measurements).
+However, besides the basic frequencies of the motors we need to take care of the 1st and 2nd harmonics that are typically present in our measurements. They are caused by n-blade propellers that interact with frame n-time more often than motors themselves (more about it [here](../../math/vibrations/vibrations_theory#harmonics)). Bearing this in mind we need `MOTORS_COUNT * RPM_MAX_HARMONICS` notch filters for each measurement (12 for X/Y/Z gyro axis so in total 36 notch filters).
 
 ```c
 // filters.h
@@ -51,7 +51,7 @@ typedef struct{
 
 ## Initialization
 
-Basically, we need to initialize all notch filters and set filter variables. We need to decide about the Q-factor of the notch filters - `RPM_Q_FACTOR`. Since we know very well central frequency we can use high values (like 300-1000). The sampling frequency needs to be adjusted to your system filtering frequency (you need to take care of the timing).
+Basically, we need to initialize all notch filters and set their variables. We need to decide about the Q-factor of the notch filters - `RPM_Q_FACTOR`. Since we know very well central frequency we can use high values (like 300-1000). The `sampling frequency_Hz` needs to be provided to match your system filtering frequency (you need to take care of the timing externally).
 
 ```c
 // filters.h
@@ -91,7 +91,7 @@ This is when the real magic happens. Let's start with a higher level - we need t
 	gyro_filtered[2] = RPM_filter_apply(&rpm_filter_gyro_Z, gyro_raw[2]);
 ```
 
-Now, let's dive into the `RPM_filter_update` function. We iterate through all filters and update coefficients for new frequencies (`biquad_filter_update`). Since for all axes (gyro X, Y, Z) coefficients for notch filters are the same there is no reason to calculate them separately so they are just copied with `RPM_filter_copy_coefficients` and `biquad_filter_copy_coefficients` functions. Since we don't want to filter lower frequencies than `100\ [Hz]` we add `RPM_MIN_FREQUENCY_HZ` and for smoother operation, we add `RPM_FADE_RANGE_HZ` which will fade out the RPM filter effect while approaching `RPM_MIN_FREQUENCY_HZ`. Array `motors_rpm[]` contains the current RPMs of the motors and you need to provide them with BDshot protocol handling.
+Now, let's dive into the `RPM_filter_update` function. We iterate through all filters and update coefficients for new frequencies (`biquad_filter_update`). Since for all axes (gyro X, Y, Z) coefficients for notch filters are the same there is no reason to calculate them separately so they are just copied with `RPM_filter_copy_coefficients` and `biquad_filter_copy_coefficients` functions. Since we don't want to filter frequencies lower than `100\ [Hz]` we add `RPM_MIN_FREQUENCY_HZ` and for smoother operation, we add `RPM_FADE_RANGE_HZ` which will fade out the RPM filter effect while approaching `RPM_MIN_FREQUENCY_HZ`. Array `motors_rpm[]` contains the current RPMs of the motors and you need to provide these values with good BDshot protocol handling.
 
 ```c
 // filters.h
@@ -156,7 +156,7 @@ void biquad_filter_copy_coefficients(biquad_Filter_t* copy_from_filter, biquad_F
 }
 ```
 
-After updating the notch filters' coefficients we can apply them for new measurements. Now we use weights to decrease impact or turn off the RPM filter if the frequency of the notch filter is beyond the useful range.
+After updating the notch filters' coefficients we can apply them for new measurements. Besides the well-known function `biquad_filter_apply_DF1` (you can use `biquad_filter_apply_DF2`), we use weights to decrease impact or turn off the RPM filter if the frequency of the notch filter is beyond the useful range.
 
 ```c
 // filters.h
@@ -219,4 +219,4 @@ int main(){
 
 # Summary
 
-In this post, we implemented RPM filtering and now you can use it to significantly improve your drone performance. I hope It wasn't too complicated and you managed to implement it yourself.
+In this post, we've implemented RPM filtering. I hope It wasn't too complicated and you managed to add this feature to your project.

@@ -3,7 +3,7 @@ layout: default
 title: Filters - Theory
 permalink: /docs/math/filters/filters_theory
 parent: Math
-nav_order: 1
+# nav_order: 1
 ---
 
 <!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
@@ -252,7 +252,7 @@ Given a first-order system, the impulse response in the time domain is described
 
 [![image](images/Zrzut%20ekranu%202022-11-22%20140731.png)](images/Zrzut%20ekranu%202022-11-22%20140731.png){:class="img-responsive"}
 
-In real-life scenarios, we usually deal with continuous systems that we can sample at some frequency (with different sensors), then perform a digital control loop on it to achieve desired control signals (discrete values for sampled inputs), and at the end send these control signals as continuous signals (with DAC _Digital to Analog Converter_) to our analogue plant. During the designing process, we want to see how our plant behaves and responds to different input signals (to accurately design the controller or to understand its properties). To do so we need to discretize our system and then perform analyses with digital signals or design a digital controller. Since it is impossible to match analogue prototypes with digital versions perfectly, there are a few methods of discretization. Each one gives a slightly (sometimes more than slightly) different final transform function (in $z$ domain):
+In real-life scenarios, we usually deal with continuous systems that we can sample at some frequency (with different sensors), then perform a digital control loop on it to achieve desired control signals (discrete values for sampled inputs), and at the end send these control signals as continuous signals (with DAC _Digital to Analog Converter_) to our analog plant. During the designing process, we want to see how our plant behaves and responds to different input signals (to accurately design the controller or to understand its properties). To do so we need to discretize our system and then perform analyses with digital signals or design a digital controller. Since it is impossible to match analog prototypes with digital versions perfectly, there are a few methods of discretization. Each one gives a slightly (sometimes more than slightly) different final transform function (in $z$ domain):
 
 - Impulse invariance
 - Zero-Order-Hold
@@ -261,16 +261,16 @@ In real-life scenarios, we usually deal with continuous systems that we can samp
 - Bilinear transform (Tustin)
 - ...
 
-For different input signals (impulse, step, ramp...) discrete systems will have different responses between each other and, what's maybe more important, different responses than the analogue system. So for different applications, we need to choose the right discretization method.
-It is worth mentioning that with a sufficiently high sampling frequency, all the above methods give identical results with analogue plants.
+For different input signals (impulse, step, ramp...) discrete systems will have different responses between each other and, what's maybe more important, different responses than the analog system. So for different applications, we need to choose the right discretization method.
+It is worth mentioning that with a sufficiently high sampling frequency, all the above methods give identical results with analog plants.
 
 ## Impulse invariance
 
-This method is based on impulse response. The main idea is that the impulse response of the discretized system has to match the sampled impulse response of the analogue system.
+This method is based on impulse response. The main idea is that the impulse response of the discretized system has to match the sampled impulse response of the analog system.
 
 [![image](images/Zrzut%20ekranu%202022-11-22%20214254.png)](images/Zrzut%20ekranu%202022-11-22%20214254.png){:class="img-responsive"}
 
-First of all, transform the analogue transfer function into the sum of the first-order terms (it works for strictly proper transfer function and without repeated poles\*):
+First of all, transform the analog transfer function into the sum of the first-order terms (it works for strictly proper transfer function and without repeated poles\*):
 
 $$
 \begin{gather*}
@@ -304,11 +304,11 @@ $$
 
 However, step response in such a designed system does not match with the response of a continuous system. Also, a combination in a series of two impulse-invariant systems doesn't have to be impulse-invariant (usually isn't). This is because a convolution of two sampled signals is not the same as a sampled convolution of those signals.
 
-\*For repeated poles you still perform decomposition of the transfer function. But since you have not only first-order parts it is needed to find $\mathcal{L}^{-1}$ for your fraction. The easiest way is to look up into the tables.
+\*For repeated poles, you still perform the decomposition of the transfer function. But since you have not only first-order parts it is needed to find $\mathcal{L}^{-1}$ for your fraction. The easiest way is to look up into the tables.
 
 ## Zero-Order-Hold and First-Order Hold
 
-When we control motors or another analogue plant with a discrete controller we don't use impulses to to control our plant. Usually, computed control signals are sent to DAC (_Digital to Analog Converter_) which transforms discrete impulses into step functions. Then these step functions can be fed into an analogue plant. Therefore we are more interested into tho response of the plant with a DAC.
+When we control motors or another analog plant with a discrete controller we don't use impulses to control our plant. Usually, computed control signals are sent to DAC (_Digital to Analog Converter_) which transforms discrete impulses into step functions. Then these step functions can be fed into an analog plant. Therefore we are more interested in the response of the plant with a DAC.
 
 [![image](images/Zrzut%20ekranu%202022-12-08%20104912.png)](images/Zrzut%20ekranu%202022-12-08%20104912.png){:class="img-responsive"}
 <custom_caption>How typical DAC transform signal from discrete (red) to continuous (green)</custom_caption>
@@ -316,7 +316,7 @@ When we control motors or another analogue plant with a discrete controller we d
 [![image](images/Zrzut%20ekranu%202024-06-03%20152356.png)](images/Zrzut%20ekranu%202024-06-03%20152356.png){:class="img-responsive"}
 <custom_caption>We want to discretize our plant with DAC</custom_caption>
 
-The DAC influences the transfer function of our system and thus changes the response. To take into account we need to add the transfer function of ZOH. Equation for that is pretty simple:
+The DAC influences the transfer function of our system and thus changes the response. To take into account we need to add the transfer function of ZOH. The equation for that is pretty simple:
 
 $$
 \begin{gather}
@@ -324,7 +324,8 @@ $$
 \end{gather}
 $$
 
-### Derivation 
+**Derivation**
+
 Let's see how this was achieved - start with the Laplace transform of sampled continuous response:
 
 $$
@@ -336,8 +337,8 @@ $$
 Between samples, the signal can be approximated as a polynomial:
 
 $$
-\begin{gather}
-\label{eq:ZOH2}h_{ZOH}(kT+\tau)=a_{n}\tau ^{n}+a_{n-1}\tau ^{n-1}+...+a_{1}\tau + a_{0}\quad where:\ \tau \in (0,\ T)
+\begin{gather}\label{eq:ZOH2}
+h_{ZOH}(kT+\tau)=a_{n}\tau ^{n}+a_{n-1}\tau ^{n-1}+...+a_{1}\tau + a_{0}\quad where:\ \tau \in (0,\ T)
 \end{gather}
 $$
 
@@ -378,7 +379,7 @@ $$
 \end{gather}
 $$
 
-Now if you use substitution $z=e^{sT}$ you will get the equation used at the beginning (eq.(\ref{eq:ZOH1})):
+Now if you use substitution $z=e^{sT}$ you will get the equation used at the beginning (eq. (\ref{eq:ZOH1})):
 
 $$
 \begin{gather}
@@ -386,12 +387,13 @@ H_{ZOH}(z)= (1-z^{-1}) \mathcal{Z} \left\{\mathcal{L}^{-1}\left\{\frac{H(s)}{Ts}
 \end{gather}
 $$
 
-If we use this method of discretization our system will have the same step response as analogue one. If you want to use the step functions as the input for your system use the ZOH method to discretize your plant.
+If we use this method of discretization our system will have the same step response as analog one. If you want to use the step functions as the input for your system use the ZOH method to discretize your plant.
 
 ## FOH
-The ZOH method gives proper responses for step function but what if we want to check responses for smoother inputs? Maybe ramp function?  
 
-If we consider higher order of eq.(\ref{eq:ZOH2}) we can write:
+The ZOH method gives proper responses for step function but what if we want to check responses for smoother inputs? Maybe ramp function?
+
+If we consider a higher order of eq. (\ref{eq:ZOH2}) we can write:
 
 $$
 \begin{gather*}
@@ -427,7 +429,7 @@ Not encouraging, but let's rearrange this and notice that $$x((k-1)T) \overset{k
 
 $$
 \begin{gather}
-H_{FOH}(s)=\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-e^{-Ts}}{s}- \frac{e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x((k-1)T) e^{-kTs} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}} \right)= \nonumber \\ =\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-(k+1)Ts} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}}\right)\nonumber = \\ = \frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}+e^{-2Ts}}{s}+\frac{1-2e^{-Ts}+ e^{-2Ts}}{Ts^2}\right)= \nonumber \\  = \frac{1}{T} \sum_{k=0}^{\infty} x(kT) e^{-kTs} \left( \frac{(1-e^{-Ts})^2}{s}+\frac{(1-e^{-Ts})^2}{Ts^2}\right)=\nonumber \\  =\underbrace{\sum _{k=0}^{\infty}x(kT) e^{-kTs}}_{H(s)}\underbrace{\left(\frac{1-e^{-Ts}}{s}\right)^2\frac{Ts+1}{T^2}}_{G_{FOH}(s)} 
+H_{FOH}(s)=\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-e^{-Ts}}{s}- \frac{e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x((k-1)T) e^{-kTs} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}} \right)= \nonumber \\ =\frac{1}{T}\sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}}{s}+\frac{1-e^{-Ts}}{Ts^2}\right) \nonumber +\\ +\frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-(k+1)Ts} \left(\frac{e^{-Ts}}{s}- \frac{1-e^{-Ts}}{Ts^{2}}\right)\nonumber = \\ = \frac{1}{T} \sum _{k=0}^{\infty}x(kT) e^{-kTs} \left(\frac{1-2e^{-Ts}+e^{-2Ts}}{s}+\frac{1-2e^{-Ts}+ e^{-2Ts}}{Ts^2}\right)= \nonumber \\  = \frac{1}{T} \sum_{k=0}^{\infty} x(kT) e^{-kTs} \left( \frac{(1-e^{-Ts})^2}{s}+\frac{(1-e^{-Ts})^2}{Ts^2}\right)=\nonumber \\  =\underbrace{\sum _{k=0}^{\infty}x(kT) e^{-kTs}}_{H(s)}\underbrace{\left(\frac{1-e^{-Ts}}{s}\right)^2\frac{Ts+1}{T^2}}_{G_{FOH}(s)}
 \end{gather}
 $$
 
@@ -439,9 +441,9 @@ H_{FOH}(s) =  \mathcal{L}\{ h_{FOH}(t)\} =\underbrace{\sum _{k=0}^{\infty}x(kT) 
  \end{gather}
 $$
 
-Ok, so we can use eq.(\ref{eq:FOH_pred}) to discretize our system and receive the same values as the analogue for the ramp function? - Not really
+Ok, so we can use eq. (\ref{eq:FOH_pred}) to discretize our system and receive the same values as the analog for the ramp function? - Not really
 
-The results are a bit off (see the graph at the end). That's because this method called "predictive first-order hold" tries to predict the next sample value with current input and one previous (see eq.(\ref{eq:FOH_p1})). So basically we analyze the case when FOH works like this:
+The results are a bit off (see the green line [here](#fig:ramp_response)). That's because this method called "predictive first-order hold" tries to predict the next sample value with current input and one previous (see eq. (\ref{eq:FOH_p1})). So basically we analyze the case when FOH works like this:
 
 [![image](images/FOH%20predictive.png)](images/FOH%20predictive.png){:class="img-responsive"}
 <custom_caption>System with predictive FOH as DAC</custom_caption>
@@ -449,7 +451,11 @@ The results are a bit off (see the graph at the end). That's because this method
 [![image](images/FOH%20predictive2.png)](images/FOH%20predictive2.png){:class="img-responsive"}
 <custom_caption>Impulse input (left) and some other input (right) after predictive FOH </custom_caption>
 
-It works for smooth monotonic outputs but fails on sharp curves. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ sample and interpolate between known values. You can make math yourself (similar to this above), but in the end, we have:
+It gives the same outputs as "typical FOH" for smooth monotonic inputs but fails when the signal changes. However, if we accept a delay of 1 sample we will know $x((k+1)T)$ value for eq. (\ref{eq:FOH_p1}).
+
+[![image](images/FOH%20casual.png)](images/FOH%20casual.png){:class="img-responsive"}<custom_caption>Impulse input (left) and some other input (right) after casual FOH</custom_caption>
+
+You can make math yourself for this FOH version (similar to the previous one), but in the end, we obtain:
 
 $$
 \begin{gather}
@@ -457,17 +463,16 @@ H_{FOH}(s) =  \mathcal{L}\{ h_{FOH}(t)\} =\underbrace{\sum _{k=0}^{\infty}x(kT) 
  \end{gather}
 $$
 
-which produces this:
+Better, but still not the same results as Matlab gives (see yellow line [here](#fig:ramp_response)). Values are correct but shifted by 1 period. To remove that delay let's just add one $$z$$ to the nominator and call it a day.
 
-[![image](images/FOH%20casual.png)](images/FOH%20casual.png){:class="img-responsive"}<custom_caption>Impulse input (left) and some other input (right) after casual FOH</custom_caption>
+Stop for a second.
 
-Better, but this is still not the same result as Matlab gives (see yellow line \ref{fig:fig1}). Values are correct but shifted by 1 period. That is because we wanted to interpolate between points as a linear function. We need to wait 1 period to get the next value and then interpolate. To remove that delay let's just add one z to the nominator and call it a day.
+When we add $$z$$ to the nominator this transfer function becomes non-casual. Can we use the non-casual functions if they are impossible to realize in real life?
 
-Stop for a minute.
+{: .note}
+Our goal is to recreate values of the sampled output signal received from our plant for given input signals - in this case, ramp functions. We want to get (in the discrete domain) the same outputs as in continuous (real life). We can not create a non-casual discrete controller but in reality, we have a continuous plant so our transfer function (non-casual) is used only for analyzing our plant responses. Therefore we can analyze our system response in a discrete version with values matching the analog plant response although there is no possibility of creating a digital version that would behave exactly as the analog (the same responses without any delay).
 
-When we added z to the nominator this transfer function became non-casual. Can we use the non-casual functions if they are impossible to realize in real life? 
-
-Our goal is to recreate values of the sampled output signal received from our plant for given input signals - in this case, ramp functions. We want to recreate in the discrete domain the same outputs as in continuous - this isn't possible in real life but can be simulated. Therefore we can analyze our system response in a discrete version with values matching the analogue plant response although there is no possibility of creating a digital version which would behave exactly as the analogue (the same response without any delay). 
+Now we can proudly write the discretization method known from Matlab:
 
 $$
 \begin{gather} H_{FOH}(z) =\frac{(z-1)^2}{z} \mathcal{Z}\left\{ \mathcal{L^{-1}}\left \{\frac{H(s)}{T^2s^2} \right\} \right\} \end{gather}
@@ -475,9 +480,9 @@ $$
 
 This method is also called the ramp-invariant or triangle-hold method (impulse response gives some clue why). As you can suspect this method gives identical discrete values as a sampled response of the continuous system when we apply a ramp input. Let's compare ramp responses of all FOH methods we've described:
 
-[![image](images/ramp%20responses.png)](images/ramp%20responses.png){:class="img-responsive"}<custom_caption>Ramp response fro different discretization methods</custom_caption>\label{fig:fig1}
+[![image](images/ramp%20responses.png)](images/ramp%20responses.png){:#fig:ramp_response}<custom_caption>Ramp response for different discretization methods (Matlab version - blue)</custom_caption>
 
-As you can see Matlab version of FOH discretization gives the same values as the original continuous response for sample points. Yellow points are the same as the previous but shifted one period (as we expected for one more $z$ in the denominator). Quite interesting is the predictive FOH response which at first gives a bit of error but then it catches up and is pretty similar to a "Matlab version".
+As you can see Matlab version of FOH discretization gives the same values as the original continuous response for sample points. Yellow points are the same as the blue but shifted one period (as we expected for one more $z$ in the denominator). Quite interesting is the predictive FOH response which at first gives a bit of error but then it catches up and is pretty similar to a "Matlab version".
 
 [more info](http://web.cecs.pdx.edu/tymerski/ece452/Chapter3.pdf)
 
@@ -540,7 +545,7 @@ The advantage of warping is an absence of aliasing since each point of a left pl
 # Summary
 
 So which one is the best? - It depends...
-It is impossible to achieve the same responses for the discretized and continuous system for all inputs. Therefore there are a lot of discretization methods to meet different requirements. Impulse invariant, HOF, or FOH gives the same responses as a continuous system for specified inputs (for different inputs responses are different). Z-matched transform does not save any specific properties but it is a simple method and when you just want a discretized system with similar properties it can be applied. The Tustin method is one of the most popular methods since it gives almost identical characteristics for specified frequency and its surroundings. This makes it useful for all kinds of filters or compensators. And never forget that all the methods give better approximations with a higher sampling frequency (for big enough they give the same outputs).
+It is impossible to achieve the same responses for the discretized and continuous system for all inputs. Therefore there are a lot of discretization methods to meet different requirements. Impulse invariant, ZOH, or FOH gives the same responses as a continuous system for specified inputs (for different inputs responses are different). Z-matched transform does not save any specific properties but it is a simple method and when you just want a discretized system with similar properties it can be applied. The Tustin method is one of the most popular methods since it gives almost identical characteristics for specified frequency and its surroundings. This makes it useful for all kinds of filters or compensators. And never forget that all the methods give better approximations with a higher sampling frequency (if $$F_s$$ is big enough they all give the same outputs).
 
 [Matlab forum](https://ch.mathworks.com/matlabcentral/answers/627953-im-confused-by-matlab-s-dontinuous-to-discrete-conversion-methods-and-how-they-work)
 
@@ -627,7 +632,6 @@ $$
 
 Summing up, for digital filters real frequency of analog filters doesn't matter, and important only is the ratio of the desired frequency with sampling frequency. Filters' characteristics can be presented in the normalized frequency domain. According to [Nyquist-Shannon theory](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem) for sampling frequency $F_{s}$, the maximal frequency that can be modified by the filter is $f_{max.}=F_{N} = \frac{F_{s}}{2}$. Therefore max. value of $\frac{f_{0}}{F_{s}}= 0.5$ that's why $(0,\ 0.5)$ is usually chosen as normalized domain. However, it can be scaled up by any number and often is used $(0,\ 1)$ or $(0,\ \pi)$.
 
-
 # IIR and FIR
 
 All the above filters are based on previous outputs - the current response is a combination of the previous inputs and outputs. These filters are called IIR - _Infinite Impulse Response_ after one impulse input they will generate a response different from zero forever. This is a consequence of using feedback.
@@ -636,7 +640,7 @@ However, in the discrete-time domain, there is a way to omit the back loop and c
 
 More information and references:
 
-- [link](https://www.ele.uva.es/~jesman/BigSeti/ftp/DSPs/FilterDesign_toolbox.pdf) (filters design)
+- [link](https://www.ele.uva.es/~jesman/BigSeti/ftp/DSPs/FilterDesign_toolbox.pdf) (filter design)
 - [link](https://www.ti.com/lit/an/slaa447/slaa447.pdf) (biquad filters implementation)
 - [link](http://shepazu.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html) (cookbook for 2nd order filters)
 - [link](https://youtu.be/tpAA5eUb6eo) (notch filter - great explanation)
