@@ -248,11 +248,11 @@ you can try it for any other inputs:
 # Discretization
 
 When we compare discretized and continuous plots - clearly one of them contains more information than the other. We can decide how much data is lost during discretization by choosing sampling frequency but anyway, some won't be collected.
-Given a first-order system, the impulse response in the time domain is described as $e^{-t}$, when we discretize this response we have: $e^{-nT}$ where $T$ is the sampling period and $n $ are consecutive samples. What value is in between samples? For well-known systems like this, it is obvious but for an unknown system with sparse sampling, it can be challenging.
+Given a first-order system, the impulse response in the time domain is described as $e^{-t}$, when we discretize this response we have: $e^{-nT}$ where $T$ is the sampling period and $n $ are consecutive samples. What value is in between samples? For well-known systems like this, it is obvious but for an unknown system with sparse sampling - it can be challenging.
 
 [![image](images/Zrzut%20ekranu%202022-11-22%20140731.png)](images/Zrzut%20ekranu%202022-11-22%20140731.png){:class="img-responsive"}
 
-In real-life scenarios usually we deal with continuous systems that we discretize, then perform a digital control loop on it, and at the end send outputs as continuous signals. Since it is impossible to perfectly match analog prototypes with digital versions, there are a few methods of discretization. Each one gives a slightly (sometimes more than slightly) different final transform function (in $z$ domain):
+In real-life scenarios, we usually deal with continuous systems that we can sample at some frequency (with different sensors), then perform a digital control loop on it to achieve desired control signals (discrete values for sampled inputs), and at the end send these control signals as continuous signals (with DAC _Digital to Analog Converter_) to our analogue plant. During the designing process, we want to see how our plant behaves and responds to different input signals (to accurately design the controller or to understand its properties). To do so we need to discretize our system and then perform analyses with digital signals or design a digital controller. Since it is impossible to match analogue prototypes with digital versions perfectly, there are a few methods of discretization. Each one gives a slightly (sometimes more than slightly) different final transform function (in $z$ domain):
 
 - Impulse invariance
 - Zero-Order-Hold
@@ -261,16 +261,16 @@ In real-life scenarios usually we deal with continuous systems that we discretiz
 - Bilinear transform (Tustin)
 - ...
 
-It is worth mentioning that with a sufficiently high sampling frequency, all the above methods give identical results.
+For different input signals (impulse, step, ramp...) discrete systems will have different responses between each other and, what's maybe more important, different responses than the analogue system. So for different applications, we need to choose the right discretization method.
+It is worth mentioning that with a sufficiently high sampling frequency, all the above methods give identical results with analogue plants.
 
 ## Impulse invariance
 
-This method is based on impulse response. The main idea is that the impulse response of the discretized system has to match the sampled impulse response of the continuous system.
+This method is based on impulse response. The main idea is that the impulse response of the discretized system has to match the sampled impulse response of the analogue system.
 
 [![image](images/Zrzut%20ekranu%202022-11-22%20214254.png)](images/Zrzut%20ekranu%202022-11-22%20214254.png){:class="img-responsive"}
 
-Sketch, how it is done:
-Transform the analog transfer function into the sum of the first-order terms (it works for strictly proper transfer function and without repeated poles\*):
+First of all, transform the analogue transfer function into the sum of the first-order terms (it works for strictly proper transfer function and without repeated poles\*):
 
 $$
 \begin{gather*}
@@ -302,17 +302,17 @@ H(z) = \mathcal{Z}\{H(s)\} =  \sum_{i=1}^{N}\frac{k_{i}}{1-e^{s_{i}T}z^{-1}}
 \end{gather*}
 $$
 
-However, step response in such a designed system does not match with the response of a continuous system. Also, a combination in a series of two impulse-invariant systems doesn't have to be impulse-invariant (usually is not). This is because a convolution of two sampled signals is not the same as a sampled convolution of those signals.
+However, step response in such a designed system does not match with the response of a continuous system. Also, a combination in a series of two impulse-invariant systems doesn't have to be impulse-invariant (usually isn't). This is because a convolution of two sampled signals is not the same as a sampled convolution of those signals.
 
 \*For repeated poles you still perform decomposition of the transfer function. But since you have not only first-order parts it is needed to find $\mathcal{L}^{-1}$ for your fraction. The easiest way is to look up into the tables.
 
 ## Zero-Order-Hold and First-Order Hold
 
-Usually, when we control motors or another analog plant with a discrete controller we don't use impulses. For each iteration, new outputs are computed and sent to DAC (_Digital to Analog Converter_) Then they are held as constants for a whole period until the next values are set and the process repeats.
+When we control motors or another analogue plant with a discrete controller we don't use impulses to to control our plant. Usually, computed control signals are sent to DAC (_Digital to Analog Converter_) which transforms discrete impulses into step functions. Then these step functions can be fed into an analogue plant. Therefore we are more interested into tho response of the plant with a DAC.
 
 [![image](images/Zrzut%20ekranu%202022-12-08%20104912.png)](images/Zrzut%20ekranu%202022-12-08%20104912.png){:class="img-responsive"}
 
-To take this into account we need to add the transfer function of ZOH. In essence, we can:
+The DAC influences the transfer function and thus changes the response. To take into account we need to add the transfer function of ZOH. In essence, we can:
 
 $$
 \begin{gather}
