@@ -509,4 +509,4 @@ void read_BDshot_response(uint32_t value, uint8_t motor)
 
 # Summary
 
-Great, now we have motors RPMs but what next? The RPM value tells us about the frequency of the motors thus also about the frequency of the noise they produce. Now we can apply very selectable notch filters to cut out those noises from gyro or accelerometer measurements. How to implement this game-changing filter? - check [this post](../Filters/RPM_filter_impl).
+Great, now we have motors RPMs but what next? The RPM value tells us about the frequency of the motors thus also about the frequency of the noise they produce. Now we can apply very selectable notch filters to cut out those noises from gyro or accelerometer measurements. How to implement this game-changing filter? - check [this post](../filters/RPM_filter_impl).
