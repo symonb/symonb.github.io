@@ -1,0 +1,27 @@
+---
+layout: default
+title: Filters - Theory
+permalink: /docs/math/filters/kalman_filter
+parent: Math
+# nav_order: 1
+---
+
+<!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
+
+[![image]()](){:class="img-responsive"}
+
+{: .no_toc }
+
+# Filters
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
+# Intro
+Kalman filter for LTI systems explained.
