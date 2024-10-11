@@ -3,7 +3,9 @@ layout: post
 title: Sensor Fusion
 has_children: true
 parent: Sensor Fusion
-# nav_order: 1
+grand_parent: Math
+toc: true
+nav_order: 1
 ---
 
 # Sensor fusion
