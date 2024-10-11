@@ -25,8 +25,6 @@ toc: true
 
 # Intro
 
-# Kalman Filter (KF)
 
-# Extended Kalman Filter (EKF)
 
 # Summary
