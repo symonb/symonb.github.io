@@ -2,7 +2,7 @@
 layout: default
 title: Unscented Kalman Filter
 permalink: /docs/math/sensor_fusion/unscented_kalman_filter
-nav_order: 2
+nav_order: 12
 parent: Sensor Fusion
 grand_parent: Math
 toc: true
