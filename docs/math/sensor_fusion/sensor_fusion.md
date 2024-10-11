@@ -3,7 +3,7 @@ layout: post
 title: Sensor Fusion
 has_children: true
 parent: Math
-nav_order: 1
+nav_order: 10
 ---
 
 # Sensor fusion
