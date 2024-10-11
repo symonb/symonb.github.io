@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Filters - Theory
-permalink: /docs/math/filters/kalman_filter
+title: Kalman Filter 
+permalink: /docs/math/sensor_fusion/kalman_filter
 parent: Math
 # nav_order: 1
 ---
@@ -12,7 +12,7 @@ parent: Math
 
 {: .no_toc }
 
-# Filters
+# Kalman Filter
 
 <details open markdown="block">
   <summary>
@@ -24,4 +24,4 @@ parent: Math
 </details>
 
 # Intro
-Kalman filter for LTI systems explained.
+Kalman Filter (KF) for LTI systems explained.
