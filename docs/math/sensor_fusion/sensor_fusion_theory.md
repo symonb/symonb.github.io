@@ -2,7 +2,7 @@
 layout: post
 title: Sensor Fusion
 has_children: true
-parent: Math
+parent: Sensor Fusion
 # nav_order: 1
 ---
 
