@@ -2,7 +2,7 @@
 layout: default
 title: Attitude estimation - gyro+acc+mag
 permalink: /docs/math/sensor_fusion/attitude_estim_theory
-nav_order: 1
+nav_order: 3
 parent: Sensor Fusion
 grand_parent: Math
 toc: true
