@@ -90,8 +90,11 @@ callouts:
   example:
     title: Example
     color: yellow
-  
 
+# Email protection liquid filter for Jekyll:
+gems:
+- jekyll-email-protect
+  
 
 kramdown:
   syntax_highlighter_opts:

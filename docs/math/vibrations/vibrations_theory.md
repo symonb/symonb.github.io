@@ -3,7 +3,7 @@ layout: default
 title: Vibrations - Theory
 permalink: /docs/math/vibrations/vibrations_theory
 parent: Math
-nav_order: 4
+# nav_order: 7
 ---
 
 <!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
