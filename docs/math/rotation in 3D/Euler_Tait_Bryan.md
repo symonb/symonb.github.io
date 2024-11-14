@@ -2,7 +2,7 @@
 layout: default
 title: Euler/Tait-Bryan/yaw-pitch-roll
 parent: Math
-nav_order: 3
+# nav_order: 3
 ---
 
 <!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->

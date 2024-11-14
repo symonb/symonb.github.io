@@ -4,5 +4,4 @@ title: About me
 nav_order: 7
 ---
 
-
-In progress
+If you want to contact me feel free to write an <a href="mailto:{{ site.email | encode_email }}" title="Contact me">email</a>.

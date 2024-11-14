@@ -2,7 +2,7 @@
 layout: default
 title: Transformation matrix
 parent: Math
-nav_order: 3
+# nav_order: 5
 ---
 
 <!-- comment or image allows {: .no_toc} to work correctly  (don't ask me why) -->
