@@ -65,9 +65,9 @@ $$
 \end{gather}
 $$
 
-# Euler angles from transoramtion matrix
+# Euler angles from transformation matrix
 
-From matrix (\ref{eq:transformation matrix 3D}) Euler angles can be easily extarcted:
+From matrix (\ref{eq:transformation matrix 3D}) Euler angles can be easily extracted:
 
 $$
    \begin{align}       \gamma&=atan2(R_{21},R_{11})\label{eq:matrix trans to yaw}\\       \beta&=\arcsin{(-R_{31})}\\       \alpha&=atan2(R_{32},R_{33})\label{eq:matrix trans to roll}   \end{align}
