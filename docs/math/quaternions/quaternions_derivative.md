@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Quaternion derivative
+permalink: /docs/math/quaternions/quaternions_derivative
 parent: Quaternions
 grand_parent: Math
 nav_order: 2
