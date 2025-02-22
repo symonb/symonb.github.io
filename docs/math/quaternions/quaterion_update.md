@@ -121,9 +121,119 @@ The following interactive plots allow you to compare the performance of the Eule
 
 <iframe src="{{ 'images/plot_3d.html' }}" width="800" height="600"></iframe>
 <iframe src="{{ 'images/plot_2d_s.html' }}" width="800" height="600"></iframe>
+<iframe src="{{ 'images/plot_error_vs_step.html' }}" width="800" height="600"></iframe>
 # Code
 
-Python code to play with those two methods 
+Python implementation of above methods:
+
+```python
+import numpy as np
+import quaternion  # Install using: pip install numpy-quaternion
+from scipy.spatial.transform import Rotation as R
+
+def simulate_gyro_measurements(duration, delta_t, angular_velocity_body):
+
+    num_steps = int(duration / delta_t)+1  # Calculate the number of simulation steps
+    gyro_measurements_pure_quat = []  # Initialize an empty list to store gyroscope measurements
+    for _ in range(num_steps):  # Iterate over each time point
+        # Create a pure quaternion from the angular velocity vector
+        q_omega = quaternion.quaternion(0, angular_velocity_body[0], angular_velocity_body[1], angular_velocity_body[2])
+        gyro_measurements_pure_quat.append(q_omega)  # Append the pure quaternion to the list
+
+    return np.array(gyro_measurements_pure_quat)  # Convert the list to a NumPy array and return it
+
+def propagate_attitude_quaternion_euler(initial_quaternion, gyro_measurements_pure_quat, delta_t):
+
+    current_quaternion = initial_quaternion  # Set the current quaternion to the initial quaternion
+    for q_omega in gyro_measurements_pure_quat[1:]:  # Iterate over each gyroscope measurement (excluding the first, which is the initial state)
+        # Update the quaternion using the Euler forward method
+        q_update = current_quaternion + 0.5 * delta_t * (current_quaternion * q_omega)
+        # Normalize the updated quaternion to prevent drift
+        q_update_normalized = q_update / np.abs(q_update)
+        current_quaternion = q_update_normalized  # Update the current quaternion for the next iteration
+
+    return current_quaternion
+
+def propagate_attitude_quaternion_trapezoidal(initial_quaternion, gyro_measurements_pure_quat, delta_t):
+    
+    current_quaternion = initial_quaternion  # Set the current quaternion to the initial quaternion
+    for q_omega in gyro_measurements_pure_quat[1:]:  # Iterate over each gyroscope measurement (excluding the first, which is the initial state)
+        # Define identity quaternion
+        identity_quat = quaternion.quaternion(1, 0, 0, 0)
+        # Calculate terms for the Trapezoidal method
+        term1 = identity_quat + 0.25 * delta_t * q_omega
+        term2 = identity_quat - 0.25 * delta_t * q_omega
+        term2_inv = term2.inverse()  # Calculate the inverse of term2
+        # Update the quaternion using the Trapezoidal method
+        q_update = current_quaternion * (term1 * term2_inv)
+        # Normalize the updated quaternion to prevent drift
+        q_update_normalized = q_update / np.abs(q_update)
+        current_quaternion = q_update_normalized  # Update the current quaternion for the next iteration
+    
+    return current_quaternion
+
+def analytical_attitude_quaternion(time, angular_velocity_body, initial_quaternion):
+
+    # Calculate the rotation angle
+    angle = np.linalg.norm(angular_velocity_body) * time
+    # Calculate the rotation axis
+    if angle > 1e-6:  # Avoid division by zero if angular velocity is very small
+        axis = angular_velocity_body / np.linalg.norm(angular_velocity_body)
+    else:
+        axis = np.array([1, 0, 0])  # Arbitrary axis if no rotation
+    # Create a quaternion from the angle-axis representation
+    rotation_quat = quaternion.from_rotation_vector(angle * axis)
+    # Apply the rotation to the initial quaternion
+    analytic_quat = rotation_quat * initial_quaternion
+    
+    return analytic_quat
+
+def quaternion_to_euler(q):
+    """Converts a quaternion to Euler angles (roll, pitch, yaw) in degrees."""
+    # Create a Rotation object from the quaternion
+    r = R.from_quat([q.x, q.y, q.z, q.w])
+    # Convert to Euler angles (in radians)
+    roll, pitch, yaw = r.as_euler('xyz', degrees=True)
+    return [roll, pitch, yaw]
+
+
+if __name__ == "__main__":
+    # Simulation Parameters
+    duration = 10.0  # Total simulation time [s]
+    angular_velocity_body = np.array([360,180,90])  # Angular velocity in degrees per second
+    initial_quaternion = quaternion.quaternion(1, 0, 0, 0)  # Initial quaternion (no rotation)
+    # Define delta_t value (step size)
+    delta_t = 0.05
+    
+    # Convert angular velocity to radians per second
+    angular_velocity_body_rad = np.radians(angular_velocity_body)
+    # Simulate Gyroscope Measurements
+    gyro_measurements_pure_quat = simulate_gyro_measurements(duration, delta_t, angular_velocity_body_rad)
+    # Propagate Attitude Quaternion using Euler and Trapezoidal methods
+    attitude_quaternions_euler = propagate_attitude_quaternion_euler(initial_quaternion, gyro_measurements_pure_quat, delta_t)
+    attitude_quaternions_trapezoidal = propagate_attitude_quaternion_trapezoidal(initial_quaternion, gyro_measurements_pure_quat, delta_t)
+    # Calculate Analytical Attitude (Ground Truth)
+    analytical_quaternions = analytical_attitude_quaternion(duration, angular_velocity_body_rad, initial_quaternion)
+    # Convert quaternions to Euler angles
+    euler_angles_euler = quaternion_to_euler(attitude_quaternions_euler)
+    euler_angles_trapezoidal = quaternion_to_euler(attitude_quaternions_trapezoidal)
+    euler_angles_analytical = quaternion_to_euler(analytical_quaternions)
+
+
+    print(f'\n\tNumerical methods comparison\n\nSETUP:\n'
+          f'delta_t = {delta_t}\n'
+          f'duration= {duration}\n'
+          f'angular velocities: w_roll:{angular_velocity_body[0]:.1f} w_pitch:{angular_velocity_body[1]:.1f} w_yaw:{angular_velocity_body[2]:.1f} [deg/s]\n\n'
+          f'RESULTS:\n'
+          f'Quaternion:\n'
+          f'Euler forward method: w:{attitude_quaternions_euler.w:.3f} i:{attitude_quaternions_euler.x:.3f} j:{attitude_quaternions_euler.y:.3f} k:{attitude_quaternions_euler.z:.3f}\n'
+          f'Trapezoidal method:   w:{attitude_quaternions_trapezoidal.w:.3f} i:{attitude_quaternions_trapezoidal.x:.3f} j:{attitude_quaternions_trapezoidal.y:.3f} k:{attitude_quaternions_trapezoidal.z:.3f}\n'
+          f'Analitical:           w:{analytical_quaternions.w:.3f} i:{analytical_quaternions.x:.3f} j:{analytical_quaternions.y:.3f} k:{analytical_quaternions.z:.3f} \n'
+          f'\nEuler Angles:\n'
+          f'Euler forward method:       roll:{euler_angles_euler[0]:.1f} pitch:{euler_angles_euler[1]:.1f} yaw:{euler_angles_euler[2]:.1f} [deg]\n'
+          f'Trapezoidal forward method: roll:{euler_angles_trapezoidal[0]:.1f} pitch:{euler_angles_trapezoidal[1]:.1f} yaw:{euler_angles_trapezoidal[2]:.1f} [deg]\n'
+          f'Analitical:                 roll:{euler_angles_analytical[0]:.1f} pitch:{euler_angles_analytical[1]:.1f} yaw:{euler_angles_analytical[2]:.1f} [deg]')
+```
 
 
 # Summary 
