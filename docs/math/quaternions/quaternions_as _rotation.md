@@ -116,9 +116,9 @@ $$
 $$
 
 and quaternion transforming from the body frame into the world one is simply a conjugation of the above:
-
+$$
 \begin{gather} {}^{0}_{1}{\mathbf{q}}= (\mathbf{q}_{\gamma}\mathbf{q}_{\beta}\mathbf{q}_{\alpha})= \left[\begin{array}{c}  \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\    \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} - \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\      \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}}\\      \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} - \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}}\end{array}\right]\label{eq:euler to quaternion}\end{gather}
-
+$$
 
 Thus, the Euler angles from the quaternion notation can be obtained according to the formulas:
 
