@@ -126,7 +126,7 @@ $$
 \begin{gather}\begin{aligned}\gamma&=\text{atan2}(2(q_xq_y-q_wq_z),q_w^2+q_x^2-q_y^2-q_z^2)\\ \beta&=\arcsin{(2(-q_xq_z-q_wq_y))}\\ \alpha&=\text{atan2}(2(q_yq_z-q_wq_x),q_w^2-q_x^2-q_y^2+q_z^2)\end{aligned}\label{eq:quaternion to euler}\end{gather}
 $$
 
-Conversion from quaternion (${}^{1}_{0}{\mathbf{q}}=q_{w} + q_{x}i + q_{y}j + q_{z}k$) to transformation matrix is also possible with the following formula:
+Conversion from quaternion ($\prescript{1}{0}{\mathbf{q}}=q_{w}+q_{x}i+q_{y}j+q_{z}k$) to transformation matrix is also possible with the following formula:
 
 $$
 \begin{gather}
