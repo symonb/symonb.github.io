@@ -130,7 +130,6 @@ Conversion from quaternion ($ {}^{1}_{0} \mathbf{q}=q_w+q_x i+q_y j+q_z k $) to 
 
 $$
 \begin{gather}
-{}^{1}_{0} \mathbf{q}=q_w+q_x i+q_y j+q_z k 
 \mathbf{R}_{0}^{1}\left({}^{1}_{0}{\mathbf{q}}\right)=
 \left[\begin{array}{ccc}
     q_{w}^2+q_{x}^2-q_{y}^2-q_{z}^2 & 2q_{x}q_{y}-2q_{w}q_{z} & 2q_{x}q_{z}+2q_{w}q_{y}\\
