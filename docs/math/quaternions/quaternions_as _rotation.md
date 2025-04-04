@@ -126,10 +126,17 @@ $$
 \begin{gather}\begin{aligned}\gamma&=\text{atan2}(2(q_xq_y-q_wq_z),q_w^2+q_x^2-q_y^2-q_z^2)\\ \beta&=\arcsin{(2(-q_xq_z-q_wq_y))}\\ \alpha&=\text{atan2}(2(q_yq_z-q_wq_x),q_w^2-q_x^2-q_y^2+q_z^2)\end{aligned}\label{eq:quaternion to euler}\end{gather}
 $$
 
-Conversion from quaternion (${}^{1}_{0}{\mathbf{q}}=a+bi+cj+dk$) to transformation matrix is also possible with the following formula:
+Conversion from quaternion (${}^{1}_{0}{\mathbf{q}}=q_{w} + q_{x}i + q_{y}j + q_{z}k$) to transformation matrix is also possible with the following formula:
 
 $$
-\begin{gather}\mathbf{R}_{0}^{1}\left({}^{1}_{0}{\mathbf{q}}\right)=\left[\begin{array}{ccc}    a^2+b^2-c^2-d^2 & 2bc-2ad & 2bd+2ac\\    2bc+2ad & a^2-b^2+c^2-d^2 & 2cd-2ab\\    2bd-2ac & 2cd+2ab & a^2-b^2-c^2+d^2    \end{array}\right]\label{eq:quaternion to matrix}\end{gather}
+\begin{gather}
+\mathbf{R}_{0}^{1}\left({}^{1}_{0}{\mathbf{q}}\right)=
+\left[\begin{array}{ccc}
+    q_{w}^2+q_{x}^2-q_{y}^2-q_{z}^2 & 2q_{x}q_{y}-2q_{w}q_{z} & 2q_{x}q_{z}+2q_{w}q_{y}\\
+    2q_{x}q_{y}+2q_{w}q_{z} & q_{w}^2-q_{x}^2+q_{y}^2-q_{z}^2 & 2q_{y}q_{z}-2q_{w}q_{x}\\
+    2q_{x}q_{z}-2q_{w}q_{y} & 2q_{y}q_{z}+2q_{w}q_{x} & q_{w}^2-q_{x}^2-q_{y}^2+q_{z}^2
+\end{array}\right]\label{eq:quaternion to matrix}
+\end{gather}
 $$
 
 The inverse process ($\mathbf{R\rightarrow q}$) should not be carried out explicitly because of the numerical errors involved. Obtaining the quaternion of the rotation should be done thoughtfully, taking into account these inaccuracies as discussed in this [paper](https://upcommons.upc.edu/bitstream/handle/2117/124384/2068-Accurate-Computation-of-Quaternions-from-Rotation-Matrices.pdf) or [here](https://en.wikipedia.org/wiki/Rotation_matrix#Quaternion).
