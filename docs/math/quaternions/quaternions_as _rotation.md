@@ -32,7 +32,7 @@ $$
 \begin{equation}\mathbf{p}'=\mathbf{q}\mathbf{p}\mathbf{q}^{-1}=\mathbf{q}\mathbf{p}\mathbf{q}^*\label{eq:rotation}\end{equation}
 $$
 
-where vector $\mathbf{p}$ is treated as a pure quaternion - $\mathbf{p}= [0,p_x,p_y,p_z]$, and quaternion $\mathbf{q}$ in trigonometric form is:
+where vector $\mathbf{p}$ is treated as a pure quaternion ($\mathbf{p}= [0,p_x,p_y,p_z]$), and quaternion $\mathbf{q}$ in trigonometric form is:
 
 $$
 \begin{equation}    \mathbf{q}=\cos{\frac{\theta}{2}}+[v_xi,v_yj,v_zk]\sin{\frac{\theta}{2}}\label{eq:trigonometric_form_long}\end{equation}
@@ -126,10 +126,11 @@ $$
 \begin{gather}\begin{aligned}\gamma&=\text{atan2}(2(q_xq_y-q_wq_z),q_w^2+q_x^2-q_y^2-q_z^2)\\ \beta&=\arcsin{(2(-q_xq_z-q_wq_y))}\\ \alpha&=\text{atan2}(2(q_yq_z-q_wq_x),q_w^2-q_x^2-q_y^2+q_z^2)\end{aligned}\label{eq:quaternion to euler}\end{gather}
 $$
 
-Conversion from quaternion (${}^{1}_{0}{\mathbf{q}}=q_{w}+q_{x}i+q_{y}j+q_{z}k$) to transformation matrix is also possible with the following formula:
+Conversion from quaternion ($ {}^{1}_{0} \mathbf{q}=q_w+q_x i+q_y j+q_z k $) to transformation matrix is also possible with the following formula:
 
 $$
 \begin{gather}
+{}^{1}_{0} \mathbf{q}=q_w+q_x i+q_y j+q_z k 
 \mathbf{R}_{0}^{1}\left({}^{1}_{0}{\mathbf{q}}\right)=
 \left[\begin{array}{ccc}
     q_{w}^2+q_{x}^2-q_{y}^2-q_{z}^2 & 2q_{x}q_{y}-2q_{w}q_{z} & 2q_{x}q_{z}+2q_{w}q_{y}\\
@@ -149,4 +150,4 @@ A property of quaternions is that any configuration in 3D space can be expressed
 quaternion $1,0,0,0$ represents a non-rotated object,
 double multiplication with quaternion $[0,i,0,0]$ gives as a product $[-1,0,0,0$, the identical quaternion is obtained when multiplying twice by the quaternion $[0,0,j,0]$, $[0,0,0,k]$ or any other pure quaternion,  
  it can be seen that pure quaternions (e.g. $[0,i,0,0]$, $[0,0,j,0]$, $[0,0,0,k]$) must represent a rotation of $180^{\circ}$, since their double "use" results in the same quaternion ($[-1,0,0,0]$). In 3D space, arriving at an identical position in 2 identical rotations for any axis can only be done by rotating by $180^{\circ}$ twice. This returns the object to its original position.
-The above description shows that the quaternion $[1,0,0,0]$ and $[-1,0,0,0]$ describe an identical setting in 3D space. It can also be seen that to return to the original quaternion one must multiply it 4 times by the pure quaternion. Which, as described above, involves rotating the object 2 times in 3D space. Therefore, in some publications, the full rotation of the quaternion is divided into $720^{\circ}$. The quaternions describing a rotation by angle $\theta$ and $360^{\circ}+\theta$ are not identical although they describe the same orientation in 3D space.
+The above description shows that the quaternion $[1,0,0,0]$ and $[-1,0,0,0]$ describe an identical setting in 3D space. It can also be seen that to return to the original quaternion one must multiply it 4 times by the pure quaternion. Which, as described above, involves rotating the object 2 times in 3D space. Therefore, in some publications, the full rotation of the quaternion is divided into $720^{\circ}$. The quaternions describing a rotation by angle $\theta$ and $360^{\circ}+\theta$ are not identical, although they describe the same orientation in 3D space.
