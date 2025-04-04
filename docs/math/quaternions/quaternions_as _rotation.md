@@ -100,7 +100,7 @@ $$
 due to the separability of multiplication can be written:
 
 $$
-\begin{gather}\mathbf{p}^{(C)}={}^{C}_{B}{\mathbf{q}}\left({}^{B}_{A}{\mathbf{q}}\mathbf{p}^{(A)} {}^{B}_{A}{\mathbf{q}^*}\right){}^{C}_{B}{\mathbf{q^*}}\end{gather}
+\begin{gather}\mathbf{p}^{(C)}={}^{C}_{B}{\mathbf{q}}\left({}^{B}_{A}{\mathbf{q}}\mathbf{p}^{(A)} {}^{B}_{A}{\mathbf{q}^*}\right){}^{C}_{B}{\mathbf{q}^*}\end{gather}
 $$
 
 which is equivalent to performing successive transformations first from (A) to (B) and then from (B) to (C):
@@ -114,6 +114,10 @@ It is often necessary to convert Euler angles into quaternions or vice versa. Ac
 $$
 \begin{gather}\begin{aligned}\mathbf{q}_{\gamma}&=\left[\cos{\frac{\gamma}{2}},0,0,\sin{\frac{\gamma}{2}}\right]\\\mathbf{q}_{\beta}&=\left[\cos{\frac{\beta}{2}},0,\sin{\frac{\beta}{2}},0\right]\\\mathbf{q}_{\alpha}&=\left[\cos{\frac{\alpha}{2}},\sin{\frac{\alpha}{2}},0,0\right]\\ \end{aligned}\\ \nonumber \\ {}^{1}_{0}{\mathbf{q}}={}^{0}_{1}{\mathbf{q}}^*= (\mathbf{q}_{\gamma}\mathbf{q}_{\beta}\mathbf{q}_{\alpha})^*= \left[\begin{array}{c}  \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\    -\sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\      -\cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} - \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}}\\      -\cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}}\end{array}\right]\label{eq:euler to quaternion}\end{gather}
 $$
+
+and quaternion transforming from the body frame into the world one is simply a conjugation of the above:
+
+\begin{gather} {}^{0}_{1}{\mathbf{q}}= (\mathbf{q}_{\gamma}\mathbf{q}_{\beta}\mathbf{q}_{\alpha})= \left[\begin{array}{c}  \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\    \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} - \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\      \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}}\\      \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} - \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}}\end{array}\right]\label{eq:euler to quaternion}\end{gather}
 
 
 Thus, the Euler angles from the quaternion notation can be obtained according to the formulas:
