@@ -115,10 +115,11 @@ $$
 \begin{gather}\begin{aligned}\mathbf{q}_{\gamma}&=\left[\cos{\frac{\gamma}{2}},0,0,\sin{\frac{\gamma}{2}}\right]\\\mathbf{q}_{\beta}&=\left[\cos{\frac{\beta}{2}},0,\sin{\frac{\beta}{2}},0\right]\\\mathbf{q}_{\alpha}&=\left[\cos{\frac{\alpha}{2}},\sin{\frac{\alpha}{2}},0,0\right]\\ \end{aligned}\\ \nonumber \\ {}^{1}_{0}{\mathbf{q}}={}^{0}_{1}{\mathbf{q}}^*= (\mathbf{q}_{\gamma}\mathbf{q}_{\beta}\mathbf{q}_{\alpha})^*= \left[\begin{array}{c}  \cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\    -\sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} + \cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} \\      -\cos{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}} - \sin{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}}\\      -\cos{\frac{\alpha}{2}}\cos{\frac{\beta}{2}}\sin{\frac{\gamma}{2}} + \sin{\frac{\alpha}{2}}\sin{\frac{\beta}{2}}\cos{\frac{\gamma}{2}}\end{array}\right]\label{eq:euler to quaternion}\end{gather}
 $$
 
+
 Thus, the Euler angles from the quaternion notation can be obtained according to the formulas:
 
 $$
-\begin{gather}\begin{aligned}\gamma&=atan2(2(q_xq_y-q_wq_z),q_w^2+q_x^2-q_y^2-q_z^2)\\ \beta&=\arcsin{(2(-q_xq_z-q_wq_y))}\\ \alpha&=atan2(2(q_yq_z-q_wq_x),q_w^2-q_x^2-q_y^2+q_z^2)\end{aligned}\label{eq:quaternion to euler}\end{gather}
+\begin{gather}\begin{aligned}\gamma&=\text{atan2}(2(q_xq_y-q_wq_z),q_w^2+q_x^2-q_y^2-q_z^2)\\ \beta&=\arcsin{(2(-q_xq_z-q_wq_y))}\\ \alpha&=\text{atan2}(2(q_yq_z-q_wq_x),q_w^2-q_x^2-q_y^2+q_z^2)\end{aligned}\label{eq:quaternion to euler}\end{gather}
 $$
 
 Conversion from quaternion (${}^{1}_{0}{\mathbf{q}}=a+bi+cj+dk$) to transformation matrix is also possible with the following formula:
