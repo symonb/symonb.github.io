@@ -84,7 +84,7 @@ $$
 
 # Transformation with quaternion
 
-A common operation performed on vectors is a transformation from one system of reference to another. To preserve uniformity with the transformation matrices, the notation ${}^B_A\mathbf{q}$ will be used. The quaternion so denoted transforms a vector from the coordinate frame (A) to (B) (according to equation (\ref{eq:rotation})). Note that $\mathbf{q}$ does not describe the rotation of the vector from position A to B, but a rotation from position B to A (a situation analogous to the transformation/rotation matrix).
+A common operation performed on vectors is a transformation from one system of reference to another. To preserve uniformity with the transformation matrices, the notation ${}^B_A\mathbf{q}$ will be used. The quaternion so denoted transforms a vector from the coordinate frame (A) to (B) (according to equation (\ref{eq:rotation})). Note that ${}^B_A\mathbf{q}$ does not describe the rotation of the vector from position A to B, but a rotation from position B to A (a situation analogous to the transformation/rotation matrix).
 Keeping this in mind and using equation (\ref{eq:combining rotations}), one can write down the formulas describing the merging of the transformation quaternions:
 
 $$
@@ -94,7 +94,7 @@ $$
 therefore transformations of the vector $\mathbf{p}^{(A)}$ to $\mathbf{p}^{(C)}$ can be written:
 
 $$
-\begin{gather}  \mathbf{p}^{(C)}={}^{C}_{A}{\mathbf{q}}\mathbf{p}^{(A)} {}^{C}_{A}{\mathbf{q}^*}= {}^{C}_{B}{\mathbf{q}} {}^{B}_{A}{\mathbf{q}} \mathbf{p}^{(A)} {}^{B}_{A}{q^*}{}^{C}_{B}{q^*}\end{gather}
+\begin{gather}  \mathbf{p}^{(C)}={}^{C}_{A}{\mathbf{q}}\mathbf{p}^{(A)} {}^{C}_{A}{\mathbf{q}^*}= {}^{C}_{B}{\mathbf{q}} {}^{B}_{A}{\mathbf{q}} \mathbf{p}^{(A)} {}^{B}_{A}{\mathbf{q}^*}{}^{C}_{B}{\mathbf{q}^*}\end{gather}
 $$
 
 due to the separability of multiplication can be written:
