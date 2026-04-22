@@ -24,7 +24,7 @@ parent: Math
 
 The most intuitive way to describe orientation is through Euler angles. The 3 angles tell about successive rotations about fixed axes. In these free rotations, you can achieve any orientation from every other. There are 12 possible combinations of these rotations. In 6 of them the first and third rotation is performed about the same axis (x-z-x, x-y-x, y-x-y, y-z-y, z-y-z, z-x-z) this convention was introduced by Leonhard Euler and these angles are called Euler angles. The other 6 possible combinations of rotations are about 3 different axes (x-y-z, x-z-y, y-x-z, y-z-x, z-y-x, z-x-y), called Tait-Bryan angles after their creators (these are also sometimes called Euler angles and to make it simpler will be included in this name).
 
-Note that each of these rotations can be performed in the system associated with the object (extrinsic rotations) or in an external, static system (intrinsic rotations). The mutual equivalences are as follows (left - rotations about the internal axes, right - rotations in the external system)
+Note that each of these rotations can be performed in the system associated with the object (intrinsic rotations) or in an external, static system (extrinsic rotations). The mutual equivalences are as follows (left - rotations about the internal axes, right - rotations in the external system)
 
 Euler angles:
 
