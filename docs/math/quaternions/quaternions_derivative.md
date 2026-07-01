@@ -104,7 +104,7 @@ The above formulas for the derivative of the quaternion of rotation use the quat
 
 $$
 \begin{gather}
- {}^{b}_{g}\mathbf{q}={}^{g}_{b}=\mathbf{q}^{-1}={}^{g}_{b}\mathbf{q}^{*}
+ {}^{b}_{g}\mathbf{q}={}^{g}_{b}\mathbf{q}^{-1}={}^{g}_{b}\mathbf{q}^{*}
 \end{gather}
 $$
 
@@ -119,18 +119,18 @@ $$
 using a formula for conjugation of quaternions multiplication:
 
 $$
-\begin{gather}
-{}^{b}_{g}\dot{\mathbf{q}}=\left( \frac{1}{2}\boldsymbol{\omega}{}^{g}_{b}\mathbf{q}(t)\right)^{*}=\frac{1}{2} {}^{g}_{b}\mathbf{q}(t)^{*}\boldsymbol{\omega}^{*}=-\frac{1}{2}{}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}
-\end{gather}
+  \begin{gather}
+    {}^{b}_{g}\dot{\mathbf{q}}=\left( \frac{1}{2}\boldsymbol{\omega}{}^{g}_{b}\mathbf{q}(t)\right)^{*}=\frac{1}{2} {}^{g}_{b}\mathbf{q}(t)^{*}\boldsymbol{\omega}^{*}=-\frac{1}{2}{}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}
+  \end{gather}
 $$
 
-Note, that the $\boldsymbol{\omega}$ which was used in the above formulas is a vector in the global system. We were considering quaternions which describe global rotation from default orientation to end one. The measurements of the gyroscope are taken in the local frame. Taking this into account, it can be written:
+Note that the $\boldsymbol{\omega}$ which was used in the above formulas is a vector in the global system. We were considering quaternions which describe global rotation from the default orientation to the final one. The gyroscope's measurements are taken in the local frame. Taking this into account, it can be written:
 
 $$
-\begin{gather}
-\begin{split}   {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\left( {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{g}_{b}\mathbf{q}(t)^{*}\right)}=\\    =-\frac{1}{2} {}^{b}_{g}\mathbf{q}(t) {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)
-\end{split}
-\end{gather}
+  \begin{gather}
+    \begin{split}   {}^{b}_{g}\dot{\mathbf{q}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\boldsymbol{\omega}^{(g)}}=-\frac{1}{2}{ {}^{b}_{g}\mathbf{q}(t)\left( {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{g}_{b}\mathbf{q}(t)^{*}\right)}=\\    =-\frac{1}{2} {}^{b}_{g}\mathbf{q}(t) {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)=-\frac{1}{2}\boldsymbol{\omega}^{(b)} {}^{b}_{g}\mathbf{q}(t)
+    \end{split}\label{eq:derivative_of_quaternion_1}
+  \end{gather}
 $$
 
 So, this is the final equation:
@@ -141,7 +141,7 @@ $$
 \end{gather}
 $$
 
-It takes gyroscope measurements in the local frame (drone frame) and quaternion that describes the transformation from the global frame to the local frame. If you want to use the same quaternion but measurements are in the global frame you need to use:
+It takes gyroscope measurements in the local frame (drone frame) and a quaternion that describes the transformation from the global frame to the local frame. If you want to use the same quaternion but the measurements are in the global frame, you need to use:
 
 $$
 \begin{gather}
@@ -149,15 +149,22 @@ $$
  \end{gather}
 $$
 
-If you have the measurements in the global frame and quaternion describing the rotation from the global to the local frame you can use the:
+If you have the measurements in the global frame and a quaternion describing the rotation from the global to the local frame you can use the:
 
 $$
 \begin{gather}
- {}^{g}_{b}\dot{\mathbf{q}}=\frac{1}{2}\boldsymbol{\omega}^{(g)} {}^{g}_{b}\mathbf{q}(t)
+ {}^{g}_{b}\dot{\mathbf{q}}=\frac{1}{2}\boldsymbol{\omega}^{(g)} {}^{g}_{b}\mathbf{q}(t).
 \end{gather}
 $$
+Similarly to \ref{eq:derivative_of_quaternion_1}, we can convert the above to use measurements in the body frame ($\boldsymbol{\omega}^{(b)}$):
+$$
+  \begin{gather}
+ {}^{g}_{b}\dot{\mathbf{q}}=\frac{1}{2}({}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)}{}^{g}_{b}\mathbf{q}(t)^{*}) {}^{g}_{b}\mathbf{q}(t) = \frac{1}{2} {}^{g}_{b}\mathbf{q}(t)\boldsymbol{\omega}^{(b)}.
+  \end{gather}
+$$
 
-So, as you can see it is important to know what reference frame you're using and which quaternion is used but now you should be able to transform these equations if necessary, at least it is my hope.
+
+So, as you can see, it is important to know what reference frame you're using for the measurements and which quaternion is used. Anyway, now you should be able to transform these equations if necessary; at least it is my hope.
 
 # Why $e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}=\mathbf{v}\frac{\omega}{2}e^{\mathbf{v}\frac{\omega}{2}t} $ is correct? {#section_last}
 
@@ -169,7 +176,7 @@ L:\ e^{\mathbf{v}\frac{\omega}{2}t}\mathbf{v}\frac{\omega}{2}= (\cos{\frac{\omeg
 \end{gather}
 $$
 
-it is important that only vector $\mathbf{v}$ has imaginary symbols and the rest of the components can be written as some scalars:
+It is important that only vector $\mathbf{v}$ has imaginary symbols, and the rest of the components can be written as some scalars:
 
 $$
 \begin{gather}
@@ -185,7 +192,7 @@ L:\  \alpha_1\alpha_2+\alpha_1\mathbf{v}\beta_2 +\mathbf{v}\beta_1 \alpha_2+\mat
 \end{gather}
 $$
 
-rearranging components we can show that $L=R$:
+Rearranging components, we can show that $L=R$:
 
 $$
 \begin{gather}
